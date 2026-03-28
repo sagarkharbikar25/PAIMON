@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>प्रvaas - Travel Smarter</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config" src="dynamic_splash_screen.js"></script>
+    <link rel="stylesheet" href="dynamic_splash_screen.css"/>
+</head>
+<body class="bg-background font-body text-on-surface antialiased overflow-hidden">
+    <!-- Splash Screen Container -->
+    <main class="relative h-screen w-full flex flex-col items-center justify-between bg-splash px-8 py-16" data-alt="stunning full-screen mountain landscape with reflections on a lake at sunrise" id="splash-screen">
+        <!-- Top Branding / Digital Concierge Label -->
+        <div class="w-full flex justify-center animate-fade-in-down">
+            <div class="px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
+                <span class="text-white text-[10px] uppercase tracking-[0.2em] font-semibold">The Digital Concierge</span>
+            </div>
+        </div>
+
+        <!-- Center Branding Area -->
+        <div class="flex flex-col items-center text-center space-y-8 mb-12">
+            <!-- App Logo & Name -->
+            <div class="flex flex-col items-center">
+                <div class="w-28 h-28 bg-white/10 backdrop-blur-xl border border-white/30 rounded-[2.5rem] flex items-center justify-center shadow-2xl mb-8 group transition-all duration-500 hover:scale-105" id="logo-container">
+                    <span class="material-symbols-outlined text-white text-6xl" data-icon="travel_explore" style="font-variation-settings: 'FILL' 1;">travel_explore</span>
+                </div>
+                <h1 class="font-headline text-6xl md:text-7xl font-extrabold tracking-tight text-white drop-shadow-lg" id="app-title">
+                    प्रvaas
+                </h1>
+                <p class="font-body text-xl md:text-2xl text-white/90 mt-4 font-light tracking-wide italic max-w-xs" id="tagline">
+                    Your journey, curated to perfection.
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Actions / Entry Area -->
+        <div class="w-full max-w-sm flex flex-col items-center space-y-12">
+            <!-- Dynamic Start Button -->
+            <button class="group w-full py-5 px-10 bg-white text-primary hover:bg-primary-container hover:text-white rounded-2xl font-headline font-bold text-xl flex items-center justify-center space-x-4 transition-all duration-300 active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.3)]" id="start-journey-btn">
+                <span>Start Your Journey</span>
+                <span class="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2" data-icon="arrow_forward">arrow_forward</span>
+            </button>
+
+            <!-- Sophisticated Subtle Brand Footer -->
+            <div class="flex flex-col items-center space-y-4">
+                <div class="w-12 h-0.5 bg-white/30 rounded-full"></div>
+                <div class="flex items-center space-x-3 text-white/50 font-label text-[10px] uppercase tracking-[0.3em]">
+                    <span>Explorer Edition 2.0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Atmospheric Overlays -->
+        <div class="absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-black/30 to-transparent pointer-events-none"></div>
+    </main>
+
+    <script src="dynamic_splash_screen.js"></script>
+</body>
+</html>
