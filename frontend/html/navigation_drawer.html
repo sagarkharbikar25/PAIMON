@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="../js/navigation_drawer.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/navigation_drawer.css"/>
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+  <!-- Top Navigation Anchor -->
+  <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl flex items-center justify-between px-6 h-16">
+    <div class="flex items-center gap-4">
+      <button class="p-2 hover:bg-slate-100/50 rounded-full transition-colors scale-95 active:scale-90 duration-200" onclick="toggleDrawer()">
+        <span class="material-symbols-outlined text-[#00327d]">menu</span>
+      </button>
+      <span class="text-2xl font-extrabold text-[#00327d] font-headline tracking-tight">प्रvaas</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <nav class="flex items-center gap-6">
+        <a class="text-[#00327d] font-bold font-headline" href="#">Itinerary</a>
+        <a class="text-slate-500 hover:text-[#00327d] font-medium font-headline transition-colors" href="#">Explore</a>
+        <a class="text-slate-500 hover:text-[#00327d] font-medium font-headline transition-colors" href="#">Guides</a>
+      </nav>
+      <div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden">
+        <img
+          class="w-full h-full object-cover"
+          data-alt="close-up portrait of Alex Horizon, a young professional man with a friendly expression and styled hair, soft natural lighting"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBJtcuakftq4KGoOwtO4-25jQU2l38__M_6QAIQMurqVGyMPocXJSJ0NgAvTAGXNkNS_lgj_IjtsZkbBth7fX7DcKhbuIQb6eU3eLUo0xyZVFm8ZnsIbxi60dIY8gPt4CLfl7LkZP2H1JqNV1b_75r4ooS7r-tlgfC2tTHG0AsrkQ2CrvmHXUD4o_i6qInh3APVxO9I0179vrFnicI557wCCVBnjZ7k_lBVK7mHgUr2tpo7kVBd9l3kxub8SHqYejtAmu7wdtqPzXb"
+        />
+      </div>
+    </div>
+  </header>
+
+  <div class="flex pt-16 min-h-screen">
+
+    <!-- Navigation Drawer (Side Menu) -->
+    <aside id="navDrawer" class="fixed left-0 top-0 z-[60] bg-white h-full w-80 rounded-r-[1.5rem] shadow-2xl shadow-slate-200/50 flex flex-col p-6 gap-2 border-r border-slate-100">
+
+      <!-- Profile Header Section -->
+      <div class="flex flex-col gap-4 mb-8 pt-4">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-lg shadow-[#00327d]/10">
+            <img
+              class="w-full h-full object-cover"
+              data-alt="User profile avatar of Alex Horizon, sophisticated portrait with soft morning light in an urban setting"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZU898_2tiRvlC0RwhK0FEKO4Xf9Tszg6qihWs3f2IZcOtB6fvkyfCi34K7R6HYUzbM_3IkLefeM7u4oJoIlWQtoOiRIpzbEY0137V-vqUfKTOfojajoL4TGzXLZU7JnmPDPLSGVefKhy2jaw2D50hEh92--oi01_Od2cYJtsPzvlPx7eaEsbuzXMV6rfXA4L2MJcKxcFKUhBGjCt4LACJVP48yxzPPwaKjE24fHguF_HG8NlqnrPuAF11iW15gxNNDQnUNAB7mUE6"
+            />
+          </div>
+          <div class="flex flex-col">
+            <h2 class="font-headline font-black text-xl text-[#00327d]">Alex Horizon</h2>
+            <span class="text-xs font-bold text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-full w-fit">Gold Member</span>
+          </div>
+        </div>
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+          <p class="text-xs text-on-surface-variant font-medium">Current Status</p>
+          <p class="text-sm font-bold text-[#00327d]">Premium Explorer</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Items -->
+      <nav class="flex flex-col gap-1">
+
+        <!-- Active Item: Itinerary -->
+        <a class="bg-[#cbe7f5] text-[#00327d] font-bold rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">Itinerary</span>
+        </a>
+
+        <a class="text-slate-600 hover:bg-slate-50 hover:translate-x-1 rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">Expenses</span>
+        </a>
+
+        <a class="text-slate-600 hover:bg-slate-50 hover:translate-x-1 rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">Tickets</span>
+        </a>
+
+        <a class="text-slate-600 hover:bg-slate-50 hover:translate-x-1 rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined" data-icon="explore">explore</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">Map</span>
+        </a>
+
+        <a class="text-slate-600 hover:bg-slate-50 hover:translate-x-1 rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined text-tertiary" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">AI Concierge</span>
+        </a>
+
+        <div class="h-px bg-slate-100 my-4 mx-4"></div>
+
+        <a class="text-slate-600 hover:bg-slate-50 hover:translate-x-1 rounded-xl flex items-center gap-4 px-4 py-3.5 transition-transform duration-300 tap-highlight-transparent" href="#">
+          <span class="material-symbols-outlined" data-icon="settings">settings</span>
+          <span class="font-['Plus_Jakarta_Sans'] font-medium text-sm">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Bottom Action Card -->
+      <div class="mt-auto p-4 bg-primary-container rounded-2xl relative overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary to-primary-container opacity-90"></div>
+        <div class="relative z-10">
+          <p class="text-on-primary font-headline font-bold text-sm">Need Help?</p>
+          <p class="text-on-primary-container text-xs mt-1 mb-3">Our 24/7 concierge is ready for you.</p>
+          <button class="w-full bg-white text-primary font-bold py-2 rounded-lg text-xs shadow-sm group-hover:bg-slate-50 transition-colors">Contact Support</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-80 flex-1 p-8">
+      <div class="max-w-6xl mx-auto">
+
+        <header class="mb-10 flex justify-between items-end">
+          <div>
+            <h1 class="text-4xl font-extrabold font-headline text-primary tracking-tight">Your Next Journey</h1>
+            <p class="text-on-surface-variant mt-2 text-lg">Managing the details for your Tokyo Expedition.</p>
+          </div>
+          <div class="flex gap-2">
+            <span class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full text-sm font-semibold">Dec 12 - Dec 24</span>
+          </div>
+        </header>
+
+        <!-- Bento Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+          <!-- Featured Destination Card -->
+          <div class="md:col-span-8 relative h-[400px] rounded-xl overflow-hidden shadow-xl group">
+            <img
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              data-alt="cinematic wide angle shot of Tokyo skyline at dusk with Mount Fuji in the background and glowing city lights"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXR1rVK_ifRAMPMp9o2WFUlRnaOlxCti2pH5Gr4ei-8VtX-5k8Z2K03bU8d-owfus-Wk6Cnhi-FUjC8Vg5trGPpX44KN5GPPI6UZLUyt37kMYaInquUXxKVh61LW4-ivA03gIHswdNCjAvvVbT_UEQn-uzCY4tar0e39vh4_iPP_t5vpolwt4GF35rGmuudfWWGAyz8am_znDaN_eVpkpQJB8OB3ci5ROgI52OL8BKdXgDsPGPe-4xrjrZFSlBtpSyc1BJVOH6XHcI"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 left-0 p-8">
+              <span class="text-white/80 text-sm font-medium tracking-widest uppercase">Currently In</span>
+              <h2 class="text-white text-5xl font-black font-headline mt-1">Tokyo, Japan</h2>
+              <div class="flex gap-4 mt-6">
+                <button class="bg-tertiary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-tertiary/20">
+                  <span class="material-symbols-outlined">map</span> View Route
+                </button>
+                <button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-xl font-bold">
+                  Full Itinerary
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Stats / Quick Info -->
+          <div class="md:col-span-4 flex flex-col gap-6">
+            <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-l-4 border-primary">
+              <h3 class="font-headline font-bold text-primary mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-sm">schedule</span> Upcoming Event
+              </h3>
+              <p class="text-on-surface font-bold">Shinjuku Food Tour</p>
+              <p class="text-on-surface-variant text-sm mt-1">Tonight at 19:30 • 2 Guests</p>
+            </div>
+
+            <div class="bg-secondary-container p-6 rounded-xl flex-1 relative overflow-hidden">
+              <div class="relative z-10">
+                <h3 class="font-headline font-bold text-on-secondary-fixed mb-2">Weather Forecast</h3>
+                <p class="text-4xl font-black text-on-secondary-fixed">12°C</p>
+                <p class="text-sm text-on-secondary-fixed-variant font-medium mt-1">Clear skies throughout the day.</p>
+              </div>
+              <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-white/20" style="font-variation-settings: 'FILL' 1;">wb_sunny</span>
+            </div>
+          </div>
+
+          <!-- Expense Overview -->
+          <div class="md:col-span-4 bg-white p-6 rounded-xl shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+              <h3 class="font-headline font-bold text-on-surface">Budget Tracking</h3>
+              <span class="material-symbols-outlined text-slate-300">more_horiz</span>
+            </div>
+            <div class="flex flex-col gap-4">
+              <div class="flex justify-between items-end">
+                <span class="text-sm font-medium text-slate-500">Spent this trip</span>
+                <span class="text-xl font-bold text-[#00327d]">$1,240.50</span>
+              </div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="w-2/3 h-full bg-primary"></div>
+              </div>
+              <p class="text-xs text-slate-400">65% of your $2,000 travel budget used</p>
+            </div>
+          </div>
+
+          <!-- Maps / Location -->
+          <div class="md:col-span-8 bg-surface-container-high rounded-xl overflow-hidden min-h-[250px] relative">
+            <img
+              class="w-full h-full object-cover grayscale opacity-50"
+              data-alt="minimalist map representation of Tokyo city center with simplified street lines and landmark markers in blue"
+              data-location="Tokyo"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ZG1knwz_pAXAY8iSkjLB3hU2z4RvT-3FX0i8swGr1n4pjopAaXfCQM8j3c2VYPnmB2TBkxvHhQSAwiSOLzbnTS9UZBN2XCqsB6w9pg8EMrfTSa-FiOhe3R8CI-8OD9ySL205rN6ZnpVrzeYHd1aqkVd5VdWleiIIpm3rFGNOZ2xWf8N7l8zq_ECbtykeGY_s8H4w-tawPXEB5ciO_EeLQgOdwVr7_3R6OzDxXxXdHlMnDSrbGSXggmN1TuGgY_bi53vW7j6nMKkI"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-white p-4 rounded-2xl shadow-xl flex items-center gap-4 border border-slate-100">
+                <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                  <span class="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm">Park Hyatt Tokyo</p>
+                  <p class="text-xs text-slate-500">Your Base of Operations</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Contextual FAB -->
+  <button class="fixed bottom-8 right-8 bg-tertiary-container text-on-tertiary-container w-16 h-16 rounded-full shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform active:scale-95 z-40">
+    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+  </button>
+
+</body>
+</html>
