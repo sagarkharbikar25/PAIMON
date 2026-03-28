@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Itinerary Planner - प्रvaas</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CDN (must load before config script) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config -->
+  <script src="../js/itinerary_planner.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/itinerary_planner.css"/>
+</head>
+<body class="bg-background text-on-surface font-body antialiased">
+
+  <!-- Top Navigation Bar -->
+  <header class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl fixed top-0 w-full z-50 shadow-none flex justify-between items-center px-6 py-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+        <img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRRJ9sWoJC-wParIFqdyjUj00aftw3hABygfXziufhw6iXpf8pix41vd0ah9xGiF88wQUEA4OodLVziQELtF5aBoKUjxnj3zI3O_6WcUB2piRqV08DGLUw9PTgGn1onwXozoju0JcMBNTg1w3hvvP1c1mWlaLGVu6_ZL41wOaMemIO8xSh2qGFjQeM9mhor-3vCluKXsnF5dQaFsbjgI9yLNPTELlceHAU-_ZLaU4NokegiYAOphpexDPvMxEGhDhZIDxMRU3e1-Uw"/>
+      </div>
+      <h1 class="text-xl font-headline font-bold text-[#00327d] tracking-tight">The Explorer</h1>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors active:scale-95 duration-200">
+      <span class="material-symbols-outlined text-slate-500" data-icon="notifications">notifications</span>
+    </button>
+  </header>
+
+  <main class="pt-24 pb-32 px-6 max-w-5xl mx-auto">
+
+    <!-- Hero Section & AI Button -->
+    <section class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="space-y-2">
+        <span class="text-on-secondary-fixed-variant font-label text-sm font-semibold tracking-widest uppercase">Your Journey</span>
+        <h2 class="text-4xl md:text-5xl font-headline font-extrabold text-primary leading-tight">Kyoto Heritage <br/>&amp; Zen Gardens</h2>
+        <p class="text-on-surface-variant font-body">Oct 12 — Oct 18 • 2 Travelers</p>
+      </div>
+      <button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-headline font-bold shadow-xl shadow-primary/10 flex items-center gap-3 hover:opacity-90 transition-all active:scale-95">
+        <span class="material-symbols-outlined" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+        AI Re-generate Itinerary
+      </button>
+    </section>
+
+    <!-- Date Scroller (Horizontal) -->
+    <nav class="flex gap-4 overflow-x-auto no-scrollbar pb-6 mb-8">
+      <button class="flex-shrink-0 bg-primary text-on-primary px-6 py-4 rounded-xl flex flex-col items-center min-w-[80px]">
+        <span class="text-xs font-label opacity-70">MON</span>
+        <span class="text-xl font-headline font-bold">12</span>
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-6 py-4 rounded-xl flex flex-col items-center min-w-[80px] hover:bg-surface-container transition-colors">
+        <span class="text-xs font-label">TUE</span>
+        <span class="text-xl font-headline font-bold">13</span>
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-6 py-4 rounded-xl flex flex-col items-center min-w-[80px] hover:bg-surface-container transition-colors">
+        <span class="text-xs font-label">WED</span>
+        <span class="text-xl font-headline font-bold">14</span>
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-6 py-4 rounded-xl flex flex-col items-center min-w-[80px] hover:bg-surface-container transition-colors">
+        <span class="text-xs font-label">THU</span>
+        <span class="text-xl font-headline font-bold">15</span>
+      </button>
+      <button class="flex-shrink-0 bg-surface-container-low text-on-surface-variant px-6 py-4 rounded-xl flex flex-col items-center min-w-[80px] hover:bg-surface-container transition-colors">
+        <span class="text-xs font-label">FRI</span>
+        <span class="text-xl font-headline font-bold">16</span>
+      </button>
+    </nav>
+
+    <!-- Day Timeline -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+
+      <!-- Left Side: Time Slots -->
+      <div class="md:col-span-8 space-y-12">
+
+        <!-- Morning Slot -->
+        <div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Morning</div>
+            <div class="h-px flex-grow bg-outline-variant/30"></div>
+          </div>
+          <div class="space-y-6">
+            <!-- Activity Card 1 -->
+            <div class="group relative bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-shadow">
+              <div class="sm:w-48 h-40 sm:h-auto overflow-hidden">
+                <img alt="Kinkaku-ji Temple" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKXC7k0Vgx-Suh2w1Y_qBwpyrV_sK0aVCIW0LR0OyRoELL4PwjUgK0gGVjjE0Ifuf9sfjlQ8vxYOyyLUQIwuI7PteGE0kUzObmh58wYCgUJgM1gZmMwforPz2Ru0pGIn3BsaRFlXn-Vz25rJ5joMY4EpfyRb4B5BL-W1LbTc1wd3NVECaU97MxstcWy4KK8zutEH36eqUOtpsC2FaQbiIVUBQ61KbfsV-POOhwsAZyUHLfPuQIqeLUyLTuXRf2S0OGzNZtoZs3rzJy"/>
+              </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-xl font-headline font-bold text-on-surface">Kinkaku-ji Temple Visit</h3>
+                    <span class="text-primary font-label font-bold text-sm">09:00 AM</span>
+                  </div>
+                  <p class="text-on-surface-variant text-sm mb-4 line-clamp-2">The Zen Buddhist temple where the top two floors are completely covered in gold leaf. Best viewed in the morning light.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-1 text-xs text-on-secondary-container bg-secondary-fixed px-3 py-1 rounded-full">
+                    <span class="material-symbols-outlined text-sm" data-icon="confirmation_number">confirmation_number</span>
+                    Ticket Booked
+                  </div>
+                  <div class="flex items-center gap-1 text-xs text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                    2.5 hrs
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Afternoon Slot -->
+        <div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="bg-secondary-fixed text-on-secondary-fixed-variant px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Afternoon</div>
+            <div class="h-px flex-grow bg-outline-variant/30"></div>
+          </div>
+          <div class="space-y-6">
+            <!-- Activity Card 2 -->
+            <div class="group relative bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col sm:flex-row shadow-sm">
+              <div class="sm:w-48 h-40 sm:h-auto overflow-hidden">
+                <img alt="Arashiyama Bamboo Grove" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE-qXfqKuH9L56_ON_h3foXHXOFtNFMn1GE2NQyidqm2dR6LJ8Fcox7PFMeTYFot01P9c9quqZCKgorU4VvRlRktzVZ3Y4MJ9yyUOPp5hw3I9p6arO7mv4ehq4WZ9QG_FEIK5RHuch7JLI2VKiWaYbs0d9AkNmtb179s9f_IXCrqi1-47zP5xx7AlAHa4Jrfw1GIf7p-nlGEpS081tAutMZqVkIe_kvRowmbB_USwpS27nJdiJXAk2rS7QBmbUGNQx2MUzIIYLyisz"/>
+              </div>
+              <div class="p-6 flex-grow">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-headline font-bold text-on-surface">Arashiyama Bamboo Grove</h3>
+                  <span class="text-primary font-label font-bold text-sm">01:30 PM</span>
+                </div>
+                <p class="text-on-surface-variant text-sm mb-4">A mesmerizing walk through towering stalks of bamboo. Peaceful atmosphere and great photo opportunities.</p>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-1 text-xs text-tertiary font-bold bg-tertiary-fixed px-3 py-1 rounded-full">
+                    <span class="material-symbols-outlined text-sm" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+                    High Crowds
+                  </div>
+                  <div class="flex items-center gap-1 text-xs text-on-surface-variant">
+                    <span class="material-symbols-outlined text-sm" data-icon="directions_walk">directions_walk</span>
+                    1.5 hrs
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity Card 3 (Editorial Style - Asymmetric) -->
+            <div class="bg-primary p-8 rounded-[2rem] text-on-primary flex flex-col md:flex-row gap-8 items-center">
+              <div class="flex-grow space-y-4">
+                <div class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">Expert Recommendation</div>
+                <h3 class="text-2xl font-headline font-bold">Tea Ceremony at Taiho-an</h3>
+                <p class="opacity-80 text-sm leading-relaxed">Escape the crowds with a traditional Urasenke style tea ceremony. Our concierge has reserved the private pavilion for 4:00 PM.</p>
+                <button class="bg-tertiary-container text-white px-6 py-2 rounded-xl text-sm font-bold hover:scale-105 transition-transform">View Details</button>
+              </div>
+              <div class="w-full md:w-48 h-48 rounded-2xl overflow-hidden rotate-3 shadow-2xl">
+                <img alt="Tea Ceremony" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNt2mvyRQYpWCPtIDm2lsUg5mKVKhMq-PdkmyAxYM8WfvbDoFJux-WgP0HVlec4AO_q9vp7ACc0FNA9q16Y_mRld3cvQnMzKoSezZXJz2HLqGv8ioYl9tJDJZjP1gjRf02yxXNRM2CPKcAdxd8vESILZ_83mAXoLM_7iEyDCuRdjslMrCU1ARoLo-z2c5DF0ugZ40nfsPLNmnw5PRdJFJt6qFUpISw5-Z3oB1BI0sXAwY-VpW0V1fneIhxB8jUlGOUyRMVQEUeJa4w"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Evening Slot -->
+        <div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="bg-primary-fixed text-on-primary-fixed-variant px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Evening</div>
+            <div class="h-px flex-grow bg-outline-variant/30"></div>
+          </div>
+          <div class="space-y-6">
+            <div class="group relative bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col sm:flex-row shadow-sm">
+              <div class="sm:w-48 h-40 sm:h-auto overflow-hidden">
+                <img alt="Gion District" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiPCALBKhrx9xTyn7nSY0qrPRT5NXQDYHZZhScC73egHqyPnAJkYTusnhf4CAVwxCp5XmTT4gAEM4OL4X22PkAP3IIKHGPndJdXnMd3nIBJipcCa2QTgVJP3nGwHmaY4_w9ly0oX7nVBHphsXwCrYFxUj7kEUizZrB4Sr-gLdIYqOg-GeCSDkMp1kVXQn8l-FbPowc2du-pWU-JgH_sWdQQ3x4KfBqbCr-jvZhqbNBNPRzTM6KGSbQ3BCNncSizw1xyS0y64H_4pOT"/>
+              </div>
+              <div class="p-6 flex-grow">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-headline font-bold text-on-surface">Dinner in Gion District</h3>
+                  <span class="text-primary font-label font-bold text-sm">07:30 PM</span>
+                </div>
+                <p class="text-on-surface-variant text-sm mb-4">Explore the historic geisha district and enjoy a multi-course Kaiseki dinner at a riverside restaurant.</p>
+                <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-1 text-xs text-on-secondary-container bg-secondary-fixed px-3 py-1 rounded-full">
+                    <span class="material-symbols-outlined text-sm" data-icon="restaurant" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+                    Reservation: Izumo
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Side: Sidebar Info (Editorial) -->
+      <aside class="md:col-span-4 space-y-8">
+        <div class="bg-surface-container-low p-8 rounded-[2rem] space-y-6 border border-white">
+          <h4 class="text-xl font-headline font-bold text-primary">Day Summary</h4>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-on-surface-variant">Travel Time</span>
+              <span class="font-bold">1h 45m</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-on-surface-variant">Total Walking</span>
+              <span class="font-bold">6.2 km</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-on-surface-variant">Est. Spend</span>
+              <span class="font-bold text-tertiary">¥18,400</span>
+            </div>
+          </div>
+          <div class="pt-6 border-t border-outline-variant/20">
+            <p class="text-xs text-on-surface-variant leading-relaxed mb-4 italic">"Kyoto temperatures will be around 18°C. A light jacket is recommended for the evening walk in Gion."</p>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-sm" data-icon="partly_cloudy_day">partly_cloudy_day</span>
+              <span class="text-sm font-bold">18° / 12°</span>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden relative aspect-square shadow-2xl">
+          <img alt="Map" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi3QTS-q2NMhVt4A_VXBYdo8kbYCJgA00MGxvWSDSwlAglmNUv9YvAa5nAPBR1lpMjJNz3CcXUjzdtEMoSPLSBXimNiY8Q4UsJaC7suU1IdDvBG0yx319I_TtiKbz2zVUbGW19pYkf_8A-oh1MEr2e614Ewi67JZR3YRzARvYtU3pfwFWiZqPJI6d-4Ji6RYUnhfKSUgWpWDaWNosJOyBM9YdKDPDOYg90xLNCIKQyfpcJG2c8xlaJF-Jnp6DVUYipa1QlXR50ta-9"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+            <button class="w-full bg-white/20 backdrop-blur-md text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 border border-white/30">
+              <span class="material-symbols-outlined" data-icon="map">map</span>
+              Expand Map View
+            </button>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Navigation Shell (Bottom) -->
+  <nav class="fixed bottom-0 left-0 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl z-50 rounded-t-[2rem] border-t border-[#c3c6d5]/15 shadow-[0_-12px_40px_rgba(23,28,31,0.06)] flex justify-around items-center px-4 pb-6 pt-3">
+    <button class="flex flex-col items-center justify-center text-[#00327d] dark:text-blue-300 bg-[#0047AB]/10 dark:bg-blue-900/30 rounded-2xl px-5 py-2 active:scale-90 transition-transform duration-200">
+      <span class="material-symbols-outlined mb-1" data-icon="event_note" style="font-variation-settings: 'FILL' 1;">event_note</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-wide">Itinerary</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#00327d] transition-colors active:scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" data-icon="payments">payments</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-wide">Expenses</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#00327d] transition-colors active:scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" data-icon="confirmation_number">confirmation_number</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-wide">Tickets</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-[#00327d] transition-colors active:scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-wide">Explore</span>
+    </button>
+  </nav>
+
+</body>
+</html>
