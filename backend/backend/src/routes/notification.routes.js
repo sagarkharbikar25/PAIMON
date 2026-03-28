@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { protect } = require('../middleware/auth.middleware');
+const { testProtect: protect } = require('../middleware/testAuth.middleware');
 const { triggerBudgetAlert, triggerWeatherAlert, triggerTripReminder } = require('../controllers/notification.controller');
 
 router.post('/budget',   protect, triggerBudgetAlert);

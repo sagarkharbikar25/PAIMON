@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { protect } = require('../middleware/auth.middleware');
+const { testProtect: protect } = require('../middleware/testAuth.middleware');
 const { getTrips, getTrip, createTrip, updateTrip, deleteTrip, inviteMember, respondToInvite } = require('../controllers/trip.controller');
 
 router.get('/',              protect, getTrips);

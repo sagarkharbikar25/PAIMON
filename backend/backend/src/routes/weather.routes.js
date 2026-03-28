@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { protect } = require('../middleware/auth.middleware');
+const { testProtect: protect } = require('../middleware/testAuth.middleware');
 const { getCurrentWeather, getForecastWeather, getWeatherAlerts } = require('../controllers/weather.controller');
 
 router.get('/current',  protect, getCurrentWeather);
