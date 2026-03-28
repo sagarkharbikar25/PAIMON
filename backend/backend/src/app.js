@@ -1,3 +1,4 @@
+require('dotenv').config(); // must be first line
 const express       = require('express');
 const cors          = require('cors');
 const helmet        = require('helmet');
@@ -5,17 +6,15 @@ const morgan        = require('morgan');
 const compression   = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss           = require('xss-clean');
-require('dotenv').config();
 
-const { connectDB }          = require('./config/db');
-const authRoutes             = require('./routes/auth.routes');
-const tripRoutes             = require('./routes/trip.routes');
-const expenseRoutes          = require('./routes/expense.routes');
-const notificationRoutes     = require('./routes/notification.routes');
-const weatherRoutes          = require('./routes/weather.routes');
-const aiRoutes               = require('./routes/ai.routes');
-const { errorHandler }       = require('./middleware/error.middleware');
-const { rateLimiter }        = require('./middleware/rateLimiter.middleware');
+const { connectDB }      = require('./config/db');
+const authRoutes         = require('./routes/auth.routes');
+const tripRoutes         = require('./routes/trip.routes');
+const expenseRoutes      = require('./routes/expense.routes');
+const notificationRoutes = require('./routes/notification.routes');
+const weatherRoutes      = require('./routes/weather.routes');
+const { errorHandler }   = require('./middleware/error.middleware');
+const { rateLimiter }    = require('./middleware/rateLimiter.middleware');
 
 const app = express();
 connectDB();
@@ -34,7 +33,6 @@ app.use('/api/trips',         tripRoutes);
 app.use('/api/expenses',      expenseRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/weather',       weatherRoutes);
-app.use('/api/ai',            aiRoutes);
 
 app.get('/health', (_req, res) =>
   res.json({ status: 'OK', uptime: process.uptime() })
