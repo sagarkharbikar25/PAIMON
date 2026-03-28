@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Dashboard | प्रvaas</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface":            "#2c3134",
+            "background":                 "#f6fafe",
+            "primary-fixed-dim":          "#b1c5ff",
+            "primary":                    "#00327d",
+            "on-tertiary-container":      "#ffaa80",
+            "tertiary-container":         "#843500",
+            "on-primary-container":       "#a5bdff",
+            "error-container":            "#ffdad6",
+            "error":                      "#ba1a1a",
+            "inverse-primary":            "#b1c5ff",
+            "on-secondary-container":     "#4e6874",
+            "on-secondary":               "#ffffff",
+            "on-tertiary":                "#ffffff",
+            "secondary-container":        "#cbe7f5",
+            "on-tertiary-fixed":          "#341100",
+            "primary-fixed":              "#dae2ff",
+            "inverse-on-surface":         "#edf1f5",
+            "surface-container-highest":  "#dfe3e7",
+            "surface-container-high":     "#e4e9ed",
+            "outline-variant":            "#c3c6d5",
+            "on-tertiary-fixed-variant":  "#7a3000",
+            "tertiary-fixed":             "#ffdbcb",
+            "surface-bright":             "#f6fafe",
+            "tertiary":                   "#602400",
+            "tertiary-fixed-dim":         "#ffb692",
+            "surface-variant":            "#dfe3e7",
+            "on-error-container":         "#93000a",
+            "secondary-fixed-dim":        "#afcbd8",
+            "surface":                    "#f6fafe",
+            "secondary":                  "#48626e",
+            "on-surface":                 "#171c1f",
+            "on-background":              "#171c1f",
+            "surface-container-lowest":   "#ffffff",
+            "on-secondary-fixed":         "#021f29",
+            "surface-tint":               "#2559bd",
+            "on-primary-fixed":           "#001946",
+            "on-primary":                 "#ffffff",
+            "on-primary-fixed-variant":   "#00419e",
+            "on-secondary-fixed-variant": "#304a55",
+            "surface-container":          "#eaeef2",
+            "on-surface-variant":         "#434653",
+            "surface-dim":                "#d6dade",
+            "secondary-fixed":            "#cbe7f5",
+            "outline":                    "#737784",
+            "on-error":                   "#ffffff",
+            "surface-container-low":      "#f0f4f8",
+            "primary-container":          "#0047ab"
+          },
+          fontFamily: {
+            "headline": ["Plus Jakarta Sans"],
+            "body":     ["Inter"],
+            "label":    ["Inter"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg":      "0.5rem",
+            "xl":      "0.75rem",
+            "full":    "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Dashboard Styles -->
+  <link rel="stylesheet" href="../css/home_dashboard.css"/>
+</head>
+
+<body class="bg-background font-body text-on-surface">
+
+  <!-- ── Top Navigation ── -->
+  <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl flex items-center justify-between px-6 h-16">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-primary text-2xl">menu</span>
+      <span class="font-headline font-extrabold text-xl text-primary tracking-tighter">प्रvaas</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-8 mr-6">
+        <span class="font-label text-primary font-bold tracking-tight text-sm">Explore</span>
+        <span class="font-label text-slate-500 font-medium tracking-tight text-sm">My Trips</span>
+        <span class="font-label text-slate-500 font-medium tracking-tight text-sm">Plan</span>
+      </div>
+      <!-- Logout button -->
+      <button id="logout-btn" class="hidden md:flex items-center gap-1 text-xs font-bold text-on-surface-variant hover:text-error transition-colors">
+        <span class="material-symbols-outlined text-sm">logout</span>
+        Logout
+      </button>
+      <div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-white shadow-sm">
+        <img
+          id="user-avatar"
+          class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwd0LpKo3FVX0fn9WMIUybWQiDTz-oBInU0SnOvnCdK9QUZJ_Cn8uscMHfLmf_5vbeDjqREjCxrFbQHEIKDZEDLC3NK_98T4BpW5cI1rz0eVJSud72Ja5SU_tPuLEf7b3Ke3g5BppWnwTeIQrejRs5JmhZVxO3W4uhfDtDF2huHyf7X_kMnXit6HFtpW8GI31e0rdtbbWC_Q1VLkDyY59j8PowA5fR3EWHn1zno36hjQaJAdVjJDnUATdTYvg8Gn0JnRaZ0CIubgnb"
+          alt="User Avatar"
+        />
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Canvas ── -->
+  <main class="pt-24 pb-32 px-6 max-w-7xl mx-auto">
+
+    <!-- Header -->
+    <header class="mb-10">
+      <h1 id="welcome-heading" class="font-headline text-4xl font-extrabold text-primary tracking-tight mb-2">Welcome Back</h1>
+      <p class="font-body text-on-surface-variant flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">location_on</span>
+        Current stop: Kyoto, Japan
+      </p>
+    </header>
+
+    <!-- Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Current Journey Card -->
+      <section class="md:col-span-8 group">
+        <div class="relative overflow-hidden rounded-[2rem] h-[500px] shadow-sm bg-surface-container-lowest">
+          <img
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdRfsjEbCeSDZqmUp3FFf8DmfCp1sM7ZuMrXq71esSfYa0Gf9UH_NKWvm4ar2cwCfEQs8agBZUma3bNAbRH0pPxK-tb39HUPZYDgOqEIjuZmrEZQCYaBRuL6UzJxY0s-oxIfk8yEjlwItK5kJ1T61BeBcjlv0v3cKsLYOXh_0waJTzWJu9BnaYlqQb72LnxcQx9UKySwlDwjr1_wSZdkLDw-yZ5fRn_MGYrvsppYfFpAm919ygetwq8-TNlH3VAOo3SrQZ1Jloo-dI"
+            alt="Kyoto Japan"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-8 w-full">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white font-label text-xs font-bold tracking-widest uppercase mb-4">Current Journey</span>
+            <h2 class="font-headline text-5xl font-extrabold text-white mb-6 tracking-tight">Spring in Kyoto</h2>
+            <div class="flex flex-wrap gap-4">
+              <button class="primary-gradient text-white px-8 py-4 rounded-xl font-headline font-bold text-sm shadow-lg flex items-center gap-2 active:scale-95 transition-transform">
+                View Itinerary
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+              <button class="bg-white/10 backdrop-blur-xl text-white border border-white/20 px-8 py-4 rounded-xl font-headline font-bold text-sm hover:bg-white/20 transition-colors">
+                Manage Bookings
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Side Column -->
+      <div class="md:col-span-4 flex flex-col gap-6">
+
+        <!-- Budget Card -->
+        <section class="bg-surface-container-low rounded-[2rem] p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <span class="font-headline font-bold text-lg text-primary">Trip Budget</span>
+              <span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">account_balance_wallet</span>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between items-end mb-2">
+                <span class="text-3xl font-headline font-extrabold text-primary">₹1,42,000</span>
+                <span class="text-on-surface-variant font-label text-xs font-medium">OF ₹2,20,000</span>
+              </div>
+              <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden">
+                <div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+              </div>
+            </div>
+            <p class="text-on-surface-variant text-sm font-body mb-6">You are 12% under budget for this phase. Great job!</p>
+          </div>
+          <button class="w-full py-4 rounded-xl border border-outline-variant/30 font-headline font-bold text-sm text-primary hover:bg-surface-container transition-colors flex items-center justify-center gap-2">
+            Full Expense Report
+            <span class="material-symbols-outlined text-sm">analytics</span>
+          </button>
+        </section>
+
+        <!-- Travel Tip Card -->
+        <section class="bg-tertiary-container text-white rounded-[2rem] p-8 relative overflow-hidden">
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="material-symbols-outlined text-on-tertiary-container" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+              <span class="font-label text-xs font-bold tracking-widest uppercase text-on-tertiary-container">Travel Tip</span>
+            </div>
+            <p class="font-headline font-semibold text-lg leading-snug text-on-tertiary-container">The best Gion views are at 6:00 AM before the crowds arrive.</p>
+          </div>
+          <div class="absolute -right-4 -bottom-4 opacity-10">
+            <span class="material-symbols-outlined text-9xl">tips_and_updates</span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Upcoming Expeditions -->
+    <section class="mt-16">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="font-headline text-2xl font-bold text-primary">Upcoming Expeditions</h3>
+        <button class="text-primary font-headline font-bold text-sm flex items-center gap-1">
+          See All
+          <span class="material-symbols-outlined text-sm">chevron_right</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Trip Card -->
+        <div class="bg-surface-container-lowest rounded-[2rem] p-4 group cursor-pointer hover:shadow-xl transition-all duration-300">
+          <div class="relative h-48 rounded-[1.5rem] overflow-hidden mb-5">
+            <img
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW_6UDcVvrvJ5X43q1AuUN9GDrzek6rZ1eLldJ2W9QOo8iMT5H016vbk6oJpRshwU6nR1-uAPOb3n6wzYZ0ysVWaitMz8JbVeOd6lRUouknWDyyCHXZRTX_fT--g5_mwp-TrsW2V-CNP3Vg9YBMB1tHwULbUnQm0SnzbWtudQPjQLSwQve84hIscM83OaPjZJu8cutQyfoNbvssvnZ7PUK8Nx11txIs1602jskNZnNIK6xrbVLbusF3FH5lsTvpIRj8Hmu-2v3uyGz"
+              alt="Royal Rajasthan"
+            />
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1">
+              <span class="material-symbols-outlined text-green-600 text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              <span class="text-[10px] font-bold text-on-surface uppercase tracking-tighter">Tickets Confirmed</span>
+            </div>
+          </div>
+          <div class="px-2 pb-2">
+            <h4 class="font-headline font-bold text-xl text-primary mb-1">Royal Rajasthan</h4>
+            <div class="flex items-center gap-4 text-on-surface-variant text-xs font-medium">
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">calendar_month</span>
+                Oct 12 - Oct 20
+              </span>
+              <span class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-xs">group</span>
+                2 People
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plan New Trip Card -->
+        <div class="hidden md:flex flex-col items-center justify-center border-2 border-dashed border-outline-variant/30 rounded-[2rem] h-full p-8 text-on-surface-variant hover:border-primary/30 hover:bg-surface-container-low transition-colors group cursor-pointer" onclick="window.location.href='/html/create_trip.html'">
+          <span class="material-symbols-outlined text-4xl mb-3 group-hover:scale-110 transition-transform">add_location_alt</span>
+          <p class="font-headline font-bold text-sm">Plan New Expedition</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FAB -->
+  <button
+    id="fab-new-trip"
+    class="fixed bottom-28 right-6 md:right-12 primary-gradient text-white w-16 h-16 rounded-2xl shadow-2xl flex items-center justify-center z-50 hover:scale-110 transition-transform active:scale-95 group"
+  >
+    <span class="material-symbols-outlined text-3xl">add</span>
+    <span class="absolute right-full mr-4 bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">New Trip</span>
+  </button>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 left-0 w-full h-20 bg-white/80 backdrop-blur-2xl flex justify-around items-center px-4 pb-safe rounded-t-[2rem] z-50 shadow-[0_-12px_40px_rgba(23,28,31,0.06)] md:hidden">
+    <div data-nav="explore" class="flex flex-col items-center justify-center text-primary bg-secondary-container/30 rounded-2xl px-5 py-2 active:scale-90 transition-transform duration-300">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">explore</span>
+      <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Explore</span>
+    </div>
+    <div data-nav="trips" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 active:scale-90 transition-transform duration-300">
+      <span class="material-symbols-outlined">luggage</span>
+      <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">My Trips</span>
+    </div>
+    <div data-nav="plan" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 active:scale-90 transition-transform duration-300">
+      <span class="material-symbols-outlined">add_circle</span>
+      <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Plan</span>
+    </div>
+    <div data-nav="profile" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 active:scale-90 transition-transform duration-300">
+      <span class="material-symbols-outlined">person</span>
+      <span class="font-label text-[10px] font-medium uppercase tracking-widest mt-1">Profile</span>
+    </div>
+  </nav>
+
+  <!-- ✅ type="module" required for import/export -->
+  <script type="module" src="../js/home_dashboard.js"></script>
+
+</body>
+</html>

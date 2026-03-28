@@ -1,102 +1,206 @@
 /* =============================================
    signup_screen.js
+   Pravas Sign Up Screen — fully connected to backend
    ============================================= */
 
-/**
- * Sign Up Screen – Interactive Behaviour
- *
- * Interactive elements on this screen:
- *   • Password visibility toggle  → show / hide the password field value
- *   • Sign Up form submit         → validate inputs and handle registration
- *   • "Continue with Google" btn  → trigger OAuth / social sign-up flow
- *   • "Log in" link               → navigate to the login screen
- *   • Terms / Privacy links       → open the relevant policy pages
- */
+import { registerWithEmail, loginWithGoogle, guardRoute } from './auth.js';
 
+/* ── Password Visibility Toggle ── */
+function togglePasswordVisibility(inputId, iconEl) {
+    const input    = document.getElementById(inputId);
+    if (!input || !iconEl) return;
+    const isHidden = input.type === 'password';
+    input.type           = isHidden ? 'text' : 'password';
+    iconEl.textContent   = isHidden ? 'visibility_off' : 'visibility';
+}
+
+/* ── UI State Helpers ── */
+
+function showFieldError(fieldId, message) {
+    clearFieldError(fieldId);
+    const input = document.getElementById(fieldId);
+    if (!input) return;
+    input.classList.add('ring-2', 'ring-error', 'bg-error-container/10');
+    const err       = document.createElement('p');
+    err.id          = `${fieldId}-error`;
+    err.className   = 'text-error text-xs mt-1 ml-1 font-medium';
+    err.textContent = message;
+    input.parentElement.appendChild(err);
+}
+
+function clearFieldError(fieldId) {
+    const input = document.getElementById(fieldId);
+    if (input) input.classList.remove('ring-2', 'ring-error', 'bg-error-container/10');
+    const existing = document.getElementById(`${fieldId}-error`);
+    if (existing) existing.remove();
+}
+
+function clearAllErrors() {
+    ['full_name', 'email', 'password'].forEach(clearFieldError);
+    removeBanner();
+}
+
+function setLoading(isLoading) {
+    const btn     = document.querySelector('[type="submit"]');
+    const btnText = document.getElementById('signup-btn-text');
+    const spinner = document.getElementById('signup-spinner');
+    if (!btn) return;
+    btn.disabled = isLoading;
+    if (btnText) btnText.textContent = isLoading ? 'Creating account…' : 'Sign Up';
+    if (spinner) spinner.classList.toggle('hidden', !isLoading);
+}
+
+function showBanner(message, type = 'error') {
+    removeBanner();
+    const form   = document.querySelector('[data-form="signup"]');
+    if (!form) return;
+    const banner     = document.createElement('div');
+    banner.id        = 'auth-banner';
+    const isError    = type === 'error';
+    banner.className = `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium mb-4
+        ${isError ? 'bg-error-container text-on-error-container' : 'bg-secondary-container text-on-secondary-container'}`;
+    banner.innerHTML = `
+        <span class="material-symbols-outlined text-base">${isError ? 'error' : 'check_circle'}</span>
+        <span>${message}</span>`;
+    form.prepend(banner);
+}
+
+function removeBanner() {
+    const existing = document.getElementById('auth-banner');
+    if (existing) existing.remove();
+}
+
+/* ── Client-side Validation ── */
+function validateSignupForm(fullName, email, password) {
+    let valid = true;
+    clearAllErrors();
+
+    if (!fullName || fullName.length < 2) {
+        showFieldError('full_name', 'Please enter your full name (at least 2 characters).');
+        valid = false;
+    }
+    if (!email || !email.includes('@')) {
+        showFieldError('email', 'Please enter a valid email address.');
+        valid = false;
+    }
+    if (!password || password.length < 8) {
+        showFieldError('password', 'Password must be at least 8 characters.');
+        valid = false;
+    }
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    if (password && password.length >= 8 && !hasSymbol) {
+        showFieldError('password', 'Password must include at least one symbol (e.g. @, #, !).');
+        valid = false;
+    }
+    return valid;
+}
+
+/* ── Map Firebase error codes to friendly messages ── */
+function friendlyError(code) {
+    const map = {
+        'auth/email-already-in-use':   'An account with this email already exists.',
+        'auth/invalid-email':          'Please enter a valid email address.',
+        'auth/weak-password':          'Password is too weak. Use at least 8 characters with symbols.',
+        'auth/network-request-failed': 'Network error. Check your connection.',
+        'auth/too-many-requests':      'Too many attempts. Please try again later.',
+    };
+    return map[code] || 'Something went wrong. Please try again.';
+}
+
+/* ── DOM Ready ── */
 document.addEventListener('DOMContentLoaded', function () {
 
-    /* ------------------------------------------------------------------
+    /* If the user is already logged in, send them to the dashboard */
+    guardRoute('/home_dashboard.html', null);
+
+    /* ----------------------------------------------------------------
        Password visibility toggle
-       ------------------------------------------------------------------ */
+       ---------------------------------------------------------------- */
     const toggleVisibilityBtn = document.querySelector('[data-action="toggle-password"]');
-    const passwordInput = document.getElementById('password');
-    const visibilityIcon = toggleVisibilityBtn ? toggleVisibilityBtn.querySelector('.material-symbols-outlined') : null;
+    const passwordInput       = document.getElementById('password');
+    const visibilityIcon      = toggleVisibilityBtn
+        ? toggleVisibilityBtn.querySelector('.material-symbols-outlined')
+        : null;
 
     if (toggleVisibilityBtn && passwordInput && visibilityIcon) {
         toggleVisibilityBtn.addEventListener('click', function () {
-            const isHidden = passwordInput.type === 'password';
-            passwordInput.type = isHidden ? 'text' : 'password';
-            visibilityIcon.textContent = isHidden ? 'visibility_off' : 'visibility';
+            togglePasswordVisibility('password', visibilityIcon);
         });
     }
 
-    /* ------------------------------------------------------------------
+    /* ----------------------------------------------------------------
        Sign Up form submission
-       ------------------------------------------------------------------ */
+       ---------------------------------------------------------------- */
     const signupForm = document.querySelector('[data-form="signup"]');
 
     if (signupForm) {
-        signupForm.addEventListener('submit', function (e) {
+        signupForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const fullName = document.getElementById('full_name').value.trim();
-            const email    = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            const fullName = document.getElementById('full_name')?.value.trim();
+            const email    = document.getElementById('email')?.value.trim();
+            const password = document.getElementById('password')?.value;
 
-            // Basic client-side validation
-            if (!fullName) {
-                console.warn('Full name is required');
-                return;
-            }
-            if (!email || !email.includes('@')) {
-                console.warn('A valid email address is required');
-                return;
-            }
-            if (password.length < 8) {
-                console.warn('Password must be at least 8 characters');
-                return;
-            }
+            if (!validateSignupForm(fullName, email, password)) return;
 
-            // TODO: send registration request to your API / auth provider
-            console.log('Sign up submitted', { fullName, email });
+            setLoading(true);
+            try {
+                await registerWithEmail(email, password, fullName);
+                // Success — redirect to dashboard
+                showBanner('Account created! Redirecting…', 'success');
+                setTimeout(() => { window.location.href = '/home_dashboard.html'; }, 800);
+            } catch (err) {
+                console.error('Sign up error:', err);
+                showBanner(friendlyError(err.code));
+            } finally {
+                setLoading(false);
+            }
         });
     }
 
-    /* ------------------------------------------------------------------
+    /* ----------------------------------------------------------------
        "Continue with Google" button
-       ------------------------------------------------------------------ */
+       ---------------------------------------------------------------- */
     const googleBtn = document.querySelector('[data-action="google-signup"]');
 
     if (googleBtn) {
-        googleBtn.addEventListener('click', function () {
-            // TODO: initiate Google OAuth flow (e.g. Firebase, Supabase, custom OAuth)
-            console.log('Continue with Google');
+        googleBtn.addEventListener('click', async function () {
+            removeBanner();
+            try {
+                googleBtn.disabled = true;
+                await loginWithGoogle();
+                window.location.href = '/home_dashboard.html';
+            } catch (err) {
+                console.error('Google signup error:', err);
+                if (err.code !== 'auth/popup-closed-by-user') {
+                    showBanner(friendlyError(err.code));
+                }
+            } finally {
+                googleBtn.disabled = false;
+            }
         });
     }
 
-    /* ------------------------------------------------------------------
+    /* ----------------------------------------------------------------
        "Log in" link
-       ------------------------------------------------------------------ */
+       ---------------------------------------------------------------- */
     const loginLink = document.querySelector('[data-action="go-to-login"]');
-
     if (loginLink) {
         loginLink.addEventListener('click', function (e) {
             e.preventDefault();
-            // TODO: navigate to the login / sign-in screen
-            console.log('Navigate to Log In screen');
+            window.location.href = '/login.html';
         });
     }
 
-    /* ------------------------------------------------------------------
+    /* ----------------------------------------------------------------
        Terms of Service & Privacy Policy links
-       ------------------------------------------------------------------ */
+       ---------------------------------------------------------------- */
     const termsLink   = document.querySelector('[data-action="terms"]');
     const privacyLink = document.querySelector('[data-action="privacy"]');
 
     if (termsLink) {
         termsLink.addEventListener('click', function (e) {
             e.preventDefault();
-            // TODO: open Terms of Service page / modal
             console.log('Open Terms of Service');
         });
     }
@@ -104,7 +208,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (privacyLink) {
         privacyLink.addEventListener('click', function (e) {
             e.preventDefault();
-            // TODO: open Privacy Policy page / modal
             console.log('Open Privacy Policy');
         });
     }

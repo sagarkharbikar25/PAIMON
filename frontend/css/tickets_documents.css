@@ -1,0 +1,30 @@
+/* =============================================
+   tickets_documents.css
+   Pravas — Tickets & Documents Styles
+   ============================================= */
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.pass-cutout-left,
+.pass-cutout-right {
+    height: 24px;
+    width: 12px;
+    background-color: #f6fafe;
+    position: absolute;
+    top: 65%;
+}
+
+.pass-cutout-left  { left: -1px;  border-radius: 0 24px 24px 0; }
+.pass-cutout-right { right: -1px; border-radius: 24px 0 0 24px; }
+
+body {
+    min-height: max(884px, 100dvh);
+}
