@@ -1,0 +1,62 @@
+/* =============================================
+   Add Expenses Form 1 — Custom Styles
+   (Tailwind handles utility classes;
+    this file covers non-utility overrides)
+   ============================================= */
+
+/* ----- Material Symbols icon rendering ----- */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ----- Hide scrollbar (cross-browser) ----- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ----- Minimum body height ----- */
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* ----- Category button: active state ----- */
+.category-btn.active {
+  background-color: var(--tw-color-primary, #00327d);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 50, 125, 0.2);
+}
+
+.category-btn:not(.active) {
+  background-color: var(--tw-color-surface-container-low, #f0f4f8);
+  color: var(--tw-color-on-surface-variant, #434653);
+}
+
+/* ----- Split toggle: active state ----- */
+.split-btn.active {
+  background-color: var(--tw-color-surface-container-lowest, #ffffff);
+  color: var(--tw-color-primary, #00327d);
+  border-radius: 0.375rem;
+}
+
+.split-btn:not(.active) {
+  color: var(--tw-color-on-surface-variant, #434653);
+}
+
+/* ----- Amount input: hide native number arrows ----- */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ----- Save button press animation ----- */
+#saveBtn:active {
+  transform: scale(0.98);
+}

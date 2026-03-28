@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Add Expense - Digital Concierge</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind Config -->
+  <script src="tailwind-config.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="add-expenses-form-1.css"/>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+
+  <!-- TopAppBar -->
+  <header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl flex justify-between items-center px-6 h-16 w-full">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed">
+        <img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXlFAdyXQBZ0hTLXoBIytbZ_FMG0HkPS4Ty8ihlPYeEZx03kaK2HHqMFGJr6HU_CArfaHlvbgluOWPmWMZtSTBHj9NHiipBx_-d1-X0WeADdQ7lg0X4bhmlcRANf3-14Ynhs86KPzvviNH1he8O_4c9y4BQWLNbfZkdI0aCS0cyFhcR94pUtOv8gxHO5do9BvFazExXymjzF4ImBUnnq7yZGcRjX1WC3JqRP2kVj24Pv5TL_s6xXo0imnSRxKJL_eF1tryiVA1qVDH"/>
+      </div>
+      <h1 class="font-headline font-bold tracking-tight text-lg text-primary">Digital Concierge</h1>
+    </div>
+    <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+      <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+    </button>
+  </header>
+
+  <main class="pt-24 px-6 max-w-2xl mx-auto">
+
+    <!-- Close Button & Context -->
+    <div class="flex items-center justify-between mb-8">
+      <button class="flex items-center gap-2 text-on-surface-variant font-semibold" id="cancelBtn">
+        <span class="material-symbols-outlined">close</span>
+        <span class="font-label text-sm uppercase tracking-widest">Cancel</span>
+      </button>
+      <div class="px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full text-xs font-bold font-label tracking-wide">
+        EURO TRIP 2024
+      </div>
+    </div>
+
+    <!-- Amount Input Section -->
+    <section class="mb-10 text-center">
+      <label class="block font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">Total Amount</label>
+      <div class="flex items-center justify-center gap-2">
+        <span class="text-4xl font-headline font-bold text-primary">₹</span>
+        <input
+          id="amountInput"
+          class="w-48 bg-transparent border-none text-5xl font-headline font-extrabold text-on-surface focus:ring-0 placeholder:text-surface-container-highest transition-all text-center"
+          placeholder="0.00"
+          type="number"
+        />
+      </div>
+    </section>
+
+    <!-- Form Details -->
+    <div class="space-y-6">
+
+      <!-- Description -->
+      <div class="bg-surface-container-low p-6 rounded-xl">
+        <label class="block font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Description</label>
+        <input
+          id="descriptionInput"
+          class="w-full bg-surface-container-high border-none rounded-lg p-4 text-on-surface font-body placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/10 transition-all"
+          placeholder="What was this for?"
+          type="text"
+        />
+      </div>
+
+      <!-- Category Selection -->
+      <div>
+        <label class="block font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4 px-2">Category</label>
+        <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2" id="categoryRow">
+          <button class="category-btn active flex-shrink-0 flex flex-col items-center gap-2 px-6 py-4 bg-primary text-on-primary rounded-xl transition-all shadow-lg shadow-primary/20" data-category="dining">
+            <span class="material-symbols-outlined">restaurant</span>
+            <span class="text-[11px] font-bold font-label uppercase">Dining</span>
+          </button>
+          <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 px-6 py-4 bg-surface-container-low text-on-surface-variant rounded-xl hover:bg-surface-container-high transition-all" data-category="transport">
+            <span class="material-symbols-outlined">directions_bus</span>
+            <span class="text-[11px] font-bold font-label uppercase">Transport</span>
+          </button>
+          <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 px-6 py-4 bg-surface-container-low text-on-surface-variant rounded-xl hover:bg-surface-container-high transition-all" data-category="stay">
+            <span class="material-symbols-outlined">hotel</span>
+            <span class="text-[11px] font-bold font-label uppercase">Stay</span>
+          </button>
+          <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 px-6 py-4 bg-surface-container-low text-on-surface-variant rounded-xl hover:bg-surface-container-high transition-all" data-category="shopping">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="text-[11px] font-bold font-label uppercase">Shopping</span>
+          </button>
+          <button class="category-btn flex-shrink-0 flex flex-col items-center gap-2 px-6 py-4 bg-surface-container-low text-on-surface-variant rounded-xl hover:bg-surface-container-high transition-all" data-category="tickets">
+            <span class="material-symbols-outlined">confirmation_number</span>
+            <span class="text-[11px] font-bold font-label uppercase">Tickets</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Date & Paid By -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-surface-container-low p-6 rounded-xl">
+          <label class="block font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Date</label>
+          <div class="flex items-center gap-3 text-on-surface">
+            <span class="material-symbols-outlined text-primary">calendar_today</span>
+            <span class="font-semibold" id="dateDisplay">Oct 24, 2024</span>
+          </div>
+        </div>
+        <div class="bg-surface-container-low p-6 rounded-xl">
+          <label class="block font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">Paid By</label>
+          <div class="flex -space-x-2">
+            <img class="w-8 h-8 rounded-full border-2 border-surface-container-low object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8FJ9T_WqcgImnA0RxVKrlwYezlf4NA-6W-dxr4uwxtnsPb25V9NG8mRyx822mWSABT9i0P5gukxZPj3AFuhS_kfnD4GJ8ZEfI2ovdRXXhlr-Z0Wl7E0XVItKjE7Wdsq7or3F97A5M9tqPx6Ig5eXF8x2MwSjA34BvPlAFrfP5Sycv7l1gXF3kEqFu_f12fn0QQzM-myiQQWtUJayEK7lUzJvGCvOeWDS6teI0gnB3OxLMVkaCjUay4tM__oiADcTIJ-8LcesulbJd"
+              alt="User 1"/>
+            <div class="w-8 h-8 rounded-full border-2 border-surface-container-low bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">ME</div>
+            <img class="w-8 h-8 rounded-full border-2 border-surface-container-low object-cover opacity-50"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq2fBdglmuMIinrGpHsCTN2qYFnKyMO5ygjkX0MF2ZDD8hZpU9uNYpRVpzJV0o6hWc1qh1NhwC_Ud5WWCu6_an1xGkneV6XX8iBf6zoT2qZdHSGRD0--1xScV4zsBC1A4h47hfESfl0xgCx__f_c-uFvQILYo0z1DfqejazidhLMq31WAgMFxFoRLaL0OX6dEKtguY8Nh6G6-kJJXnC1CWLSivtvMfCc3RRiOvlpa8St8cMFh-IocRcpfP3_GlJjNk28eLdC7boMrR"
+              alt="User 3"/>
+            <div class="w-8 h-8 rounded-full border-2 border-surface-container-low bg-surface-container-highest flex items-center justify-center">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Split Method -->
+      <div class="bg-surface-container-low p-6 rounded-xl">
+        <div class="flex items-center justify-between mb-6">
+          <label class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Split Method</label>
+          <div class="flex bg-surface-container-high p-1 rounded-lg" id="splitToggle">
+            <button class="split-btn active px-4 py-1.5 bg-surface-container-lowest text-primary rounded-md text-xs font-bold font-label transition-all" data-split="equally">EQUALLY</button>
+            <button class="split-btn px-4 py-1.5 text-on-surface-variant rounded-md text-xs font-bold font-label transition-all" data-split="percent">PERCENT</button>
+          </div>
+        </div>
+
+        <!-- Calculation Preview -->
+        <div class="space-y-4" id="splitPreview">
+          <div class="flex items-center justify-between p-3 bg-surface-container-lowest rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container text-xs">ME</div>
+              <div>
+                <p class="text-sm font-bold text-on-surface">You</p>
+                <p class="text-[10px] text-on-surface-variant uppercase font-bold split-label">1/3 Share</p>
+              </div>
+            </div>
+            <p class="font-headline font-bold text-primary split-amount">₹ 420.00</p>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-surface-container-lowest/50 rounded-xl">
+            <div class="flex items-center gap-3">
+              <img class="w-10 h-10 rounded-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_qecel3XlGF5J6qq9l3JsIN-jFp2h1jMCTmuagV9g-Jhiw1Ov11GRVmmSzRQLNjYZtic3M0dKkvFtAmziEuhmf06nJXOWYhR8hWiRdWW_kXFdxZF1aN50S6E0yYyCGO0RS1XMyTg11l_lLslIshizzkdzPu7OSzaHNyDJkBzNgdCgdSBc4arYtdGw7Hn8oSafps0y6MgAPaKDrDL12Ul4uYUhhDiTt04k4T73faI4aNGa1tEgx0AvPqLT51V_SGqw7p05wUFUWLBV"
+                alt="Sarah J."/>
+              <div>
+                <p class="text-sm font-bold text-on-surface">Sarah J.</p>
+                <p class="text-[10px] text-on-surface-variant uppercase font-bold split-label">1/3 Share</p>
+              </div>
+            </div>
+            <p class="font-headline font-bold text-on-surface split-amount">₹ 420.00</p>
+          </div>
+          <div class="flex items-center justify-between p-3 bg-surface-container-lowest/50 rounded-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-xs">AK</div>
+              <div>
+                <p class="text-sm font-bold text-on-surface">Amit K.</p>
+                <p class="text-[10px] text-on-surface-variant uppercase font-bold split-label">1/3 Share</p>
+              </div>
+            </div>
+            <p class="font-headline font-bold text-on-surface split-amount">₹ 420.00</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Fixed Bottom Action Button -->
+  <div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-surface via-surface to-transparent">
+    <button id="saveBtn" class="w-full h-16 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-2xl font-headline font-bold text-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+      <span class="material-symbols-outlined">save</span>
+      Save Expense
+    </button>
+  </div>
+
+  <!-- JS -->
+  <script src="add-expenses-form-1.js"></script>
+
+</body>
+</html>
