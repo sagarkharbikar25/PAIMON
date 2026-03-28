@@ -1,0 +1,27 @@
+/* =============================================
+   weather_alerts.css
+   Styles for Weather & Alerts page
+   ============================================= */
+
+/* Material Symbols icon font settings */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Glass panel utility */
+.glass-panel {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Base font & background */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f6fafe;
+    min-height: max(884px, 100dvh);
+}
+
+/* Headline font applied to headings */
+h1, h2, h3, .headline-font {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}

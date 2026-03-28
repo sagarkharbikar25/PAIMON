@@ -1,0 +1,159 @@
+/* ============================================================
+   upload_ticket.css
+   Styles for frontend/html/upload_ticket.html
+   Part of: प्रvaas — Smart India Hackathon 2025
+   ============================================================ */
+
+
+/* ── Base ──────────────────────────────────────────────────── */
+
+body {
+  min-height: max(884px, 100dvh);
+}
+
+
+/* ── Material Symbols — icon fill helper ───────────────────── */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Use class="icon-fill" to render a filled variant */
+.icon-fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Use class="icon-fill-bold" for filled + heavy weight (FAB check icon) */
+.icon-fill-bold {
+  font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 24;
+}
+
+
+/* ── Glass / backdrop effect ───────────────────────────────── */
+
+.glass-effect {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+
+/* ── Top App Bar ───────────────────────────────────────────── */
+
+header {
+  /* Tailwind handles most — this ensures blur works on all browsers */
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+
+/* ── Drop Zone — drag-over state ───────────────────────────── */
+
+#drop-zone.drag-over {
+  border-color: rgba(0, 50, 125, 0.6);   /* primary/60 */
+  background-color: rgba(218, 226, 255, 0.25); /* primary-fixed/25 */
+}
+
+
+/* ── Upload item row ───────────────────────────────────────── */
+
+.upload-item {
+  transition: background-color 0.15s ease;
+}
+
+.upload-item:hover {
+  background-color: var(--tw-surface-container-low, #f0f4f8);
+}
+
+.upload-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ── Bottom Nav Bar ────────────────────────────────────────── */
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.15s ease;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  color: #00327d;
+}
+
+.nav-item:active {
+  transform: scale(0.9);
+}
+
+.nav-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+
+/* ── FAB ───────────────────────────────────────────────────── */
+
+#fab-done {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#fab-done:hover {
+  box-shadow: 0 8px 24px rgba(96, 36, 0, 0.35);
+}
+
+#fab-done:active {
+  transform: scale(0.9);
+}
+
+
+/* ── Upload progress bar (injected by JS) ──────────────────── */
+
+.upload-progress-bar {
+  height: 3px;
+  border-radius: 9999px;
+  background-color: #0047ab;
+  transition: width 0.3s ease;
+}
+
+.upload-progress-track {
+  width: 100%;
+  height: 3px;
+  border-radius: 9999px;
+  background-color: #dae2ff;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+
+/* ── Toast notification (injected by JS) ───────────────────── */
+
+#toast {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  background: #171c1f;
+  color: #f6fafe;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  z-index: 999;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

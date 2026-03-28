@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="../js/tailwind_config.js"></script>
+  <link rel="stylesheet" href="../css/upload_ticket.css"/>
+  <title>Upload Ticket — प्रvaas</title>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen pb-32">
+
+  <!-- TopAppBar -->
+  <header class="bg-white/70 backdrop-blur-xl fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 w-full">
+    <div class="flex items-center gap-3">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors active:scale-95 duration-200">
+        <span class="material-symbols-outlined text-primary">arrow_back</span>
+      </button>
+      <h1 class="text-xl font-bold text-[#00327d] font-headline tracking-tight">Upload Ticket</h1>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high">
+        <img
+          alt="User"
+          id="user-avatar"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx4QyPKuuiavkGHYf9x801NizKecyfqx4qTxFBKmtRg5ceaZ80iUwiBASbAWsA0YgiRkvN0DEGpNlWEGtmIwvAHUXJGa1QUDxywqiYG2-cEhiXmBg4ILDhuUOXyp9-2YLMYE5tq3145J6mpULN1teIhnJ7psr_iIkuO_nfljRqKvfovQ1xzWUwAHV-8rtdGPnNkFJ92K67UD1VCXDi9Gygq7exHqvImp4OGllsERO1n8TYjTHINfNJLENM2MF5DsoME4GOwfW_tpLM"
+        />
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24 px-6 max-w-2xl mx-auto">
+
+    <!-- Brand Header Section -->
+    <section class="mb-8">
+      <h2 class="font-headline text-3xl font-extrabold text-primary mb-2">Add Your Journey</h2>
+      <p class="text-on-surface-variant font-body">Import your travel documents for seamless itinerary sync and encrypted storage.</p>
+    </section>
+
+    <!-- Main Upload Bento Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+
+      <!-- Primary Drag & Drop Area -->
+      <div
+        id="drop-zone"
+        class="md:col-span-6 bg-surface-container-lowest border-2 border-dashed border-outline-variant/30 rounded-xl p-10 flex flex-col items-center justify-center text-center transition-all hover:border-primary/50 group"
+      >
+        <div class="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+          <span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+        </div>
+        <h3 class="font-headline text-xl font-bold mb-2">Drop your files here</h3>
+        <p class="text-on-surface-variant text-sm mb-6 max-w-xs">Supports PDF, JPG, PNG from airlines, railways, or booking portals.</p>
+        <button id="browse-btn" class="bg-primary text-on-primary px-8 py-3 rounded-lg font-semibold flex items-center gap-2 hover:shadow-lg active:scale-95 transition-all">
+          Browse Files
+        </button>
+        <!-- Hidden file input -->
+        <input type="file" id="file-input" accept=".pdf,.jpg,.jpeg,.png" multiple class="hidden"/>
+      </div>
+
+      <!-- Fast Action Cards -->
+      <div id="btn-camera" class="md:col-span-2 bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-surface-container transition-colors cursor-pointer group">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:bg-primary-fixed transition-colors">
+          <span class="material-symbols-outlined text-primary">photo_camera</span>
+        </div>
+        <span class="font-headline font-bold text-sm">Take Photo</span>
+      </div>
+
+      <div id="btn-gallery" class="md:col-span-2 bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-surface-container transition-colors cursor-pointer group">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:bg-primary-fixed transition-colors">
+          <span class="material-symbols-outlined text-primary">image</span>
+        </div>
+        <span class="font-headline font-bold text-sm">Gallery</span>
+      </div>
+
+      <div id="btn-pdf" class="md:col-span-2 bg-surface-container-low rounded-xl p-6 flex flex-col items-center justify-center gap-3 hover:bg-surface-container transition-colors cursor-pointer group">
+        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:bg-primary-fixed transition-colors">
+          <span class="material-symbols-outlined text-primary">picture_as_pdf</span>
+        </div>
+        <span class="font-headline font-bold text-sm">Import PDF</span>
+      </div>
+
+    </div>
+
+    <!-- Security Confirmation Section -->
+    <section class="mt-12 p-6 bg-secondary-container/30 rounded-xl flex items-start gap-4 border border-secondary-fixed">
+      <div class="bg-white p-2 rounded-lg">
+        <span class="material-symbols-outlined text-secondary icon-fill">enhanced_encryption</span>
+      </div>
+      <div>
+        <h4 class="font-headline font-bold text-on-secondary-container">Encrypted Travel Vault</h4>
+        <p class="text-sm text-on-secondary-container/80 mt-1 leading-relaxed">
+          प्रvaas uses military-grade AES-256 encryption. Your tickets are only accessible to you and are automatically cleared from our servers after your trip ends.
+        </p>
+        <div class="flex gap-4 mt-4">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-primary icon-fill">check_circle</span>
+            <span class="text-xs font-medium text-on-secondary-container">SSL Secured</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-primary icon-fill">check_circle</span>
+            <span class="text-xs font-medium text-on-secondary-container">Privacy First</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Uploads -->
+    <section class="mt-12">
+      <div class="flex justify-between items-end mb-4">
+        <h3 class="font-headline text-lg font-bold">Recent Uploads</h3>
+        <button id="view-all-btn" class="text-primary text-sm font-semibold">View All</button>
+      </div>
+      <div id="uploads-list" class="space-y-3">
+
+        <div class="upload-item flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-container">
+              <img
+                alt="Ticket Preview"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9VHvND3NET79KauDLXg8dCgKv7H7BzViSYYNrqr-hwWk0XJropEBH2DuH9wQXhV5yN3DQC8OR63TzCpf5IwHhsqqLIDFTHbeS42UOnsBpinVBZMbWLhGBZH70N3gqEl0eg_l39wCiHQfpf_280XeMdAe1UjYxLOsGRb8fb34xonUTL3Pk_9R1lv7yP3eZ0dE1a-Y6kD0giTVeTMBDZaRj9_29LYsNpNaOfgq9SMW7Dc2czf0PKz6nYCGmO79LpfFtfqw7-WgvbKVW"
+              />
+            </div>
+            <div>
+              <p class="font-bold text-sm">Air India AI-802.pdf</p>
+              <p class="text-xs text-on-surface-variant">Uploaded 2 mins ago • 1.2 MB</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant cursor-pointer upload-menu-btn">more_vert</span>
+        </div>
+
+        <div class="upload-item flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-container">
+              <img
+                alt="Ticket Preview"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSaQZUEQkZZyye7DJ7npgxungh9qir3uXK08z4tG8--WMy0DGH1-AGg6msNKMm_2l1v4n54X-5GWMmPZqWioLEMwzcce_tEKkhVSh20O_6pwbk9gwsFSKVvHxGf2hKOvuPLxniYnMQYUuOoMsFA7h5RxxN15hhCdykJRaj24cu8P-re_D5q1qJT0w0SlNoFeSIMmChr6z5xKlgIDEn8SanSc6Ij5P2piSNaX_fXbbJ-pXrg_-jW2ATlIOHatOxNe59OUSMj44Fxubg"
+              />
+            </div>
+            <div>
+              <p class="font-bold text-sm">Hotel_Booking_Mumbai.jpg</p>
+              <p class="text-xs text-on-surface-variant">Uploaded Yesterday • 450 KB</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant cursor-pointer upload-menu-btn">more_vert</span>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Nav Bar -->
+  <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-2xl z-50 rounded-t-[2rem] border-t border-[#c3c6d5]/15 shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
+    <a class="nav-item text-slate-400 px-5 py-2" href="#">
+      <span class="material-symbols-outlined">event_note</span>
+      <span class="nav-label">Itinerary</span>
+    </a>
+    <a class="nav-item text-slate-400 px-5 py-2" href="#">
+      <span class="material-symbols-outlined">payments</span>
+      <span class="nav-label">Expenses</span>
+    </a>
+    <a class="nav-item nav-item--active text-[#00327d] bg-[#0047AB]/10 rounded-2xl px-5 py-2" href="#">
+      <span class="material-symbols-outlined icon-fill">confirmation_number</span>
+      <span class="nav-label">Tickets</span>
+    </a>
+    <a class="nav-item text-slate-400 px-5 py-2" href="#">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="nav-label">Explore</span>
+    </a>
+  </nav>
+
+  <!-- FAB -->
+  <div class="fixed bottom-24 right-6 z-40">
+    <button id="fab-done" class="w-14 h-14 bg-tertiary-container text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-transform">
+      <span class="material-symbols-outlined text-white icon-fill-bold">check</span>
+    </button>
+  </div>
+
+  <script src="../js/upload_ticket.js"></script>
+</body>
+</html>
