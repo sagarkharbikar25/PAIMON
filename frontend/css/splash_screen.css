@@ -1,0 +1,13 @@
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.bg-splash {
+    background-image: linear-gradient(to bottom, rgba(246, 250, 254, 0.4), rgba(246, 250, 254, 0.95)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuC-TYUN0F3gvoyZNPsdDdejCTDDoJXeTX4o7d6wCkJ1-oxPOUgHfjTtaNWswZPaCU2XraA0PzAerfbtJY1LPibZwGVZxo-gC8nV5QKpkn-VWHA7qCmylSQlFfxMcpR3eCEn-kL4P_DSujMvcE5BMElJcuhTLrZyBwlF91XyHh8DltPlhFHpKeCdDXWWb1O-oaAUH9-UDCn9Lu1BXyu86RCJuPTb86BXEBNCquc80EyGyzfrBobKeRk-rjSCswwefTTRir2CJDJ32OtQ);
+    background-size: cover;
+    background-position: center;
+}
+
+body {
+    min-height: max(884px, 100dvh);
+}

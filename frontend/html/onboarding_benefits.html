@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>The Explorer - Onboarding</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS -->
+  <script src="../js/onboarding_benefits.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="../css/onboarding_benefits.css"/>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+    <div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-2xl" data-icon="travel_explore">travel_explore</span>
+        <span class="text-xl font-extrabold text-blue-900 tracking-tighter font-headline">The Explorer</span>
+      </div>
+      <button class="text-slate-500 font-medium text-sm px-4 py-2 hover:bg-slate-100/50 transition-colors rounded-xl" onclick="skipOnboarding()">
+        Skip
+      </button>
+    </div>
+  </header>
+
+  <main class="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-24">
+
+    <!-- Visual Section: Digital Ticket Vault -->
+    <div class="relative w-full max-w-md aspect-square flex items-center justify-center mb-12">
+
+      <!-- Background Layering: Tonal Shift Circles -->
+      <div class="absolute w-72 h-72 bg-secondary-container/40 rounded-full blur-3xl"></div>
+
+      <div class="ticket-stack relative w-full h-full flex flex-col items-center justify-center">
+
+        <!-- Hotel Voucher Card (Asymmetric Layer) -->
+        <div class="ticket-float-2 absolute z-10 w-64 p-6 bg-surface-container-lowest rounded-xl shadow-[0_12px_40px_rgba(23,28,31,0.06)] border border-outline-variant/15">
+          <div class="flex justify-between items-start mb-4">
+            <div class="p-2 bg-secondary-container rounded-lg">
+              <span class="material-symbols-outlined text-on-secondary-container" data-icon="apartment">apartment</span>
+            </div>
+            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Confirmed</span>
+          </div>
+          <div class="space-y-1">
+            <h4 class="font-headline font-bold text-primary">Marriott Grand</h4>
+            <p class="text-[11px] text-on-surface-variant">Check-in: Oct 24, 2:00 PM</p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-dashed border-outline-variant/30 flex justify-between items-center">
+            <div class="h-4 w-24 bg-surface-container rounded-full"></div>
+            <span class="material-symbols-outlined text-slate-300" data-icon="qr_code_2">qr_code_2</span>
+          </div>
+        </div>
+
+        <!-- Boarding Pass Card (Primary Focus) -->
+        <div class="ticket-float-1 relative z-20 w-72 bg-surface-container-lowest rounded-xl shadow-[0_20px_50px_rgba(0,50,125,0.08)] overflow-hidden">
+          <div class="gradient-primary p-5 text-on-primary">
+            <div class="flex justify-between items-center mb-6">
+              <span class="text-[10px] font-bold tracking-widest uppercase opacity-80">Boarding Pass</span>
+              <span class="material-symbols-outlined text-xl" data-icon="flight_takeoff">flight_takeoff</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="text-2xl font-headline font-extrabold tracking-tight">LHR</h3>
+                <p class="text-[10px] opacity-70">London</p>
+              </div>
+              <div class="flex flex-col items-center flex-1 px-4">
+                <div class="w-full border-t border-dashed border-on-primary/30 relative">
+                  <span class="material-symbols-outlined absolute -top-3 left-1/2 -translate-x-1/2 text-sm" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                </div>
+                <span class="text-[9px] mt-2 opacity-60">11h 45m</span>
+              </div>
+              <div class="text-right">
+                <h3 class="text-2xl font-headline font-extrabold tracking-tight">HND</h3>
+                <p class="text-[10px] opacity-70">Tokyo</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 bg-white">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Passenger</p>
+                <p class="text-xs font-bold text-on-surface">Alex Rivera</p>
+              </div>
+              <div>
+                <p class="text-[10px] text-slate-400 font-medium uppercase tracking-wider">Seat</p>
+                <p class="text-xs font-bold text-on-surface">14A (First)</p>
+              </div>
+            </div>
+            <div class="flex justify-center py-2 bg-surface-container-low rounded-lg">
+              <div class="flex flex-col items-center">
+                <span class="material-symbols-outlined text-4xl text-on-surface/20" data-icon="barcode">barcode</span>
+                <span class="text-[8px] font-mono mt-1 tracking-[0.4em] text-slate-400">994820104471</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Decorative Chip -->
+        <div class="absolute top-10 right-4 z-30 bg-tertiary text-on-tertiary px-3 py-1 rounded-full text-[10px] font-bold shadow-lg shadow-tertiary/20 flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+          All-in-One
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Text Content Area -->
+    <div class="text-center max-w-sm">
+      <h1 class="text-3xl font-headline font-extrabold text-primary tracking-tight mb-4">
+        All Tickets in One Place
+      </h1>
+      <p class="text-on-surface-variant font-body leading-relaxed">
+        Your Travel Hub - All your bookings in one sleek digital wallet. Say goodbye to searching through endless emails.
+      </p>
+    </div>
+
+    <!-- Pagination Dots -->
+    <div class="flex gap-2 mt-12" id="paginationDots">
+      <div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+      <div class="w-6 h-2 rounded-full bg-primary"></div>
+      <div class="w-2 h-2 rounded-full bg-surface-container-highest"></div>
+    </div>
+
+  </main>
+
+  <!-- Fixed Bottom Action Bar -->
+  <footer class="fixed bottom-0 left-0 w-full px-6 pb-10 pt-4 bg-gradient-to-t from-surface via-surface/90 to-transparent">
+    <div class="max-w-md mx-auto flex flex-col gap-4">
+      <button
+        class="w-full py-4 gradient-primary text-on-primary font-headline font-bold rounded-xl shadow-xl shadow-primary/20 active:scale-95 transition-all"
+        onclick="nextStep()"
+      >
+        Next Step
+      </button>
+      <div class="flex justify-center">
+        <p class="text-[11px] text-slate-400 font-medium tracking-wide" id="stepLabel">Step 2 of 3</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Background Decoration -->
+  <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40">
+    <div class="absolute top-[-10%] left-[-20%] w-[80%] h-[60%] bg-blue-100/50 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[50%] bg-orange-50/50 rounded-full blur-[100px]"></div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+/* =============================================
+   map_explore.css — Pravas Map Explore Screen Styles
+   ============================================= */
+
+/* Body min-height override */
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Material Symbols icon variation settings */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Hide scrollbar utility (for chip row) */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

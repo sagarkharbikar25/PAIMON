@@ -1,0 +1,23 @@
+/* =============================================
+   add_expense_form_2.css
+   Styles for Add Expense Form 2 page
+   ============================================= */
+
+/* Material Symbols icon font settings */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Ensure page has minimum height */
+body {
+    min-height: max(884px, 100dvh);
+}

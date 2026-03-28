@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>प्रvaas - Travel Smarter</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CDN (must load before config script) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config -->
+  <script src="../js/splash_screen.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/splash_screen.css"/>
+</head>
+<body class="bg-background font-body text-on-surface antialiased overflow-hidden">
+
+  <!-- Splash Screen Container -->
+  <main class="relative h-screen w-full flex flex-col items-center justify-between bg-splash px-6 py-12" data-alt="serene mountain landscape with jagged snow-capped peaks under a soft pastel morning sky reflecting tranquility and exploration">
+
+    <!-- Top Status/Time Spacer -->
+    <div class="w-full h-8"></div>
+
+    <!-- Center Branding Area -->
+    <div class="flex flex-col items-center text-center space-y-6">
+      <!-- App Logo & Name -->
+      <div class="flex flex-col items-center animate-fade-in">
+        <div class="w-24 h-24 bg-primary rounded-[2rem] flex items-center justify-center shadow-2xl mb-6 bg-gradient-to-br from-primary to-primary-container">
+          <span class="material-symbols-outlined text-white text-5xl" data-icon="travel_explore" style="font-variation-settings: 'FILL' 1;">travel_explore</span>
+        </div>
+        <h1 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter text-primary">
+          प्रvaas
+        </h1>
+        <p class="font-body text-lg md:text-xl text-secondary mt-4 font-medium tracking-wide">
+          Travel smarter, stress-free
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Actions / Loading Indicator -->
+    <div class="w-full max-w-sm flex flex-col items-center space-y-10">
+      <!-- Asymmetric Loading Bar -->
+      <div class="w-48 h-1 bg-surface-container rounded-full overflow-hidden relative">
+        <div class="absolute inset-0 bg-primary w-1/3 rounded-full"></div>
+      </div>
+      <!-- Focus CTA for Entry -->
+      <button class="group w-full py-5 px-8 bg-tertiary-container hover:bg-tertiary text-on-tertiary rounded-xl font-headline font-semibold text-lg flex items-center justify-between transition-all duration-300 active:scale-95 shadow-lg">
+        <span>Start Your Journey</span>
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+      </button>
+      <!-- Secondary Brand Anchor -->
+      <div class="flex items-center space-x-2 text-on-surface-variant/60 font-label text-xs uppercase tracking-widest">
+        <span class="w-8 h-[1px] bg-outline-variant/30"></span>
+        <span>The Explorer Edition</span>
+        <span class="w-8 h-[1px] bg-outline-variant/30"></span>
+      </div>
+    </div>
+
+    <!-- Glass Decorative Accents -->
+    <div class="absolute top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-40 -right-20 w-80 h-80 bg-tertiary/5 rounded-full blur-3xl"></div>
+
+  </main>
+
+  <!-- Suppressed Shells Rule: Since this is an onboarding/splash screen, NavBars are excluded to prioritize the focus journey -->
+
+</body>
+</html>

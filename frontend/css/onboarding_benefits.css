@@ -1,0 +1,38 @@
+/* =============================================
+   onboarding_benefits.css — Pravas Onboarding Benefits Screen Styles
+   ============================================= */
+
+/* Body min-height override */
+body {
+  min-height: max(884px, 100dvh);
+}
+
+/* Material Symbols icon variation settings */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+/* Primary gradient (used on boarding pass header & CTA button) */
+.gradient-primary {
+  background: linear-gradient(135deg, #00327d 0%, #0047ab 100%);
+}
+
+/* Ticket stack perspective container */
+.ticket-stack {
+  perspective: 1000px;
+}
+
+/* Asymmetric ticket float positions */
+.ticket-float-1 {
+  transform: rotate(-4deg) translateY(0);
+}
+
+.ticket-float-2 {
+  transform: rotate(6deg) translate(20px, 40px);
+}

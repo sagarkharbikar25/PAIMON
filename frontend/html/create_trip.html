@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>प्रvaas - Plan New Expedition</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config" src="create_trip.js"></script>
+    <link rel="stylesheet" href="create_trip.css"/>
+</head>
+<body class="min-h-screen pb-24">
+    <!-- TopAppBar -->
+    <header class="fixed top-0 w-full z-50 glass-header shadow-none">
+        <div class="flex items-center justify-between px-6 h-16 w-full">
+            <div class="flex items-center gap-4">
+                <button class="p-2 hover:bg-slate-100/50 transition-colors active:scale-95 duration-200 rounded-full menu-btn">
+                    <span class="material-symbols-outlined text-[#00327d]" data-icon="menu">menu</span>
+                </button>
+                <h1 class="text-xl font-extrabold text-[#00327d] tracking-tighter">प्रvaas</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden">
+                    <img alt="Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a smiling young man with light beard outdoors in soft natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAInLzR6k5IKfNoHF0DW8_jKaRxr9SjUsk_wC6zRTILGpDryI7PRh05djT-vnNlPK8QGWMuEqwLceYCmcY5Rve-rVmVM-lDyXa5MDiaT7Xy45qGuug6JSrWy2fpz3pFeu_aftaOaVoS04713h3VAuejpsjlmVlrhP48ScVqmRONmCvUH3Lc1bSpZBymlm2ET_rdSxvqiWhEMHaSBoIZgL520Jwvd3wRGdbH7TIvnLRzLrxSop8aG9OvvevCgyZCwEhLE-RzMRSYyYXN"/>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Canvas -->
+    <main class="pt-24 px-6 max-w-2xl mx-auto">
+        <header class="mb-10">
+            <h2 class="text-3xl font-bold text-primary tracking-tight mb-2">Plan New Expedition</h2>
+            <p class="text-on-surface-variant font-medium">Your next great adventure begins with a single detail.</p>
+        </header>
+
+        <!-- Form Layout -->
+        <section class="space-y-8">
+            <form id="trip-form">
+                <!-- Where To -->
+                <div class="space-y-3 mb-8">
+                    <label class="block text-sm font-semibold text-primary tracking-wide ml-1">Where to next?</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="travel_explore">travel_explore</span>
+                        <input class="w-full h-14 pl-12 pr-4 bg-surface-container-high border-none rounded-xl focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-outline" id="destination-input" placeholder="Search destinations, peaks, or coastlines..." type="text"/>
+                    </div>
+                </div>
+
+                <!-- Dates Grid -->
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="space-y-3">
+                        <label class="block text-sm font-semibold text-primary tracking-wide ml-1">Departure</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="calendar_today">calendar_today</span>
+                            <input class="w-full h-14 pl-12 pr-4 bg-surface-container-high border-none rounded-xl focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="departure-date" type="date"/>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-sm font-semibold text-primary tracking-wide ml-1">Return</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="event_repeat">event_repeat</span>
+                            <input class="w-full h-14 pl-12 pr-4 bg-surface-container-high border-none rounded-xl focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="return-date" type="date"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expedition Members -->
+                <div class="space-y-4 mb-8">
+                    <label class="block text-sm font-semibold text-primary tracking-wide ml-1">Expedition Members</label>
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-3" id="members-avatars">
+                            <div class="w-12 h-12 rounded-full border-4 border-background overflow-hidden">
+                                <img class="w-full h-full object-cover" data-alt="professional headshot of a woman with long dark hair smiling brightly against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGlD8kCGe6xc6-Yr6nj8puTjCi7bvuLAcvBlkfoJoXM78B15-vqF1g4y3YZ50BAEPkdEwsSMDO3MNijR5MUdIIOMMgA1hLfHsCJpB1pRCCSiB2x4SYRipDbQaZQSfG56MTc_SCFuHvRRdsntkVPTQ73VnjIDNpOjQS5iQp3NszviYRnwv5J1sSbcVyLI9PJ3erTkcu6qNHRsecVSrGn9f4ekuEvTmM40JmwCBWXDtJQQa0nRdNBFaxxDdh37IIG7UJU4rkJGRhGLEd"/>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border-4 border-background overflow-hidden">
+                                <img class="w-full h-full object-cover" data-alt="smiling man in casual denim shirt standing against a wooden wall in soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiAEPARXlEPuC842inuHQoeMf5pHV9Oj6KxmATmwUmvirbVC18wAfua0SpWUbGrY6qVidZlr7sEQqVzMAnDq3mjqYb3WEq-FfpY2blz06Zpgefo0A9_sNhuEQE_BZFWbg-U7B55w1sgPUeYeaLX_5gZ7d0a0CnZvpn7-iWSXc6-R43fLV17aLSc0qxpy22SbiUPrBj9YX20_eBXGgCk6ObTEXe9yTQpSLlU_tapKrdNXlGRhahlVie7g0eeu1oSA6zenOf0wh3iyfn"/>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border-4 border-background overflow-hidden">
+                                <img class="w-full h-full object-cover" data-alt="vibrant portrait of a young woman with curly hair and stylish earrings looking confidently at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAqHqfWkkops3rXibmQPet-IVP-EokLXr7WCGRfL2iQGiWWkH8J99BEfG-0PsMDtCnYhaeBmWIsgq3pM_Guc72LUgj5dpFefOzcGKwMYaDELqGVq0OGKG-mug1CXXHCtIEJGAYhEOFwTDbNBu5oNk0HLfPKo0xD5WhEyX4-UZ7N8rzIzqIIARqUnocke9MyaKQCp01FPuY1B28QZY8AA6FE9VqgefwUdxSbsqW236i5cixl_ApkQOrA6M60BOw0TTtl7bBFJG1PSPl"/>
+                            </div>
+                        </div>
+                        <button class="h-12 px-6 rounded-xl bg-secondary-container text-on-secondary-container font-semibold flex items-center gap-2 hover:bg-opacity-80 transition-all active:scale-95" id="add-members-btn" type="button">
+                            <span class="material-symbols-outlined text-[20px]" data-icon="person_add">person_add</span>
+                            <span class="text-sm">Add Members</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Budget -->
+                <div class="space-y-3 mb-8">
+                    <label class="block text-sm font-semibold text-primary tracking-wide ml-1">Estimated Budget (Optional)</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="payments">payments</span>
+                        <input class="w-full h-14 pl-12 pr-4 bg-surface-container-high border-none rounded-xl focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-outline" id="budget-input" placeholder="e.g. $5,000" type="text"/>
+                    </div>
+                </div>
+
+                <!-- Primary Action -->
+                <div class="pt-4">
+                    <button class="w-full h-16 bg-gradient-to-r from-primary to-primary-container text-white rounded-xl font-bold text-lg flex items-center justify-center gap-3 shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98]" id="create-expedition-btn" type="submit">
+                        <span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+                        Create Expedition
+                    </button>
+                </div>
+            </form>
+
+            <!-- Inspiration Section -->
+            <div class="pt-12 pb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-on-surface">Daily Inspiration</h3>
+                    <span class="text-xs font-bold text-primary-container tracking-widest uppercase">Curated For You</span>
+                </div>
+                <div class="relative group cursor-pointer overflow-hidden rounded-xl h-64 shadow-xl" id="inspiration-card">
+                    <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="dramatic view of winding turquoise water canyon in Oman with steep desert rock walls under clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIAvMYu8nAGok_hrlr6GF1BrePX_ed8fVncoGZOX4Mj8hKP8wyEtCULZALneihEqzppkhhe-xhUX2NIRIPXP5I0uVkKKKjjBWQi8dKbJ0dAgFFd4JDDzzZA-gzvWJzqL3kVykWt9CrZ_N3XpPPxk7uGVbEVNnPmj7fGrmTqZ8eqSfDd7wGtSBmUVTcmb87KDjRryk2sdIFTcGSxjhidBb9KSJSjmU5kH_hm0Z5_qYdxCBB9qPmGKPtCXZFFauI93YuI7cU77EkM-_C"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-tertiary-fixed text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            <span class="text-[10px] text-primary-fixed uppercase tracking-widest font-bold">Recommended Expedition</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-1">The Hidden Valleys of Oman</h4>
+                        <p class="text-primary-fixed text-sm opacity-90 line-clamp-1">Explore emerald wadis and ancient mountain forts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full h-20 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl flex justify-around items-center px-4 pb-safe z-50 rounded-t-[2rem] shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
+        <!-- Plan is the active tab for this screen -->
+        <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#0047ab] transition-transform duration-300 active:scale-90 bottom-nav-link" href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="explore">explore</span>
+            <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Explore</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#0047ab] transition-transform duration-300 active:scale-90 bottom-nav-link" href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="luggage">luggage</span>
+            <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">My Trips</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-[#00327d] bg-[#cbe7f5]/30 rounded-2xl px-5 py-2 transition-transform duration-300 active:scale-90 bottom-nav-link active" href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+            <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Plan</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#0047ab] transition-transform duration-300 active:scale-90 bottom-nav-link" href="#">
+            <span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+            <span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Profile</span>
+        </a>
+    </nav>
+
+    <script src="create_trip.js"></script>
+</body>
+</html>
