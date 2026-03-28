@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CDN (must load before config script) -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config -->
+  <script src="../js/settings_screen.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../css/settings_screen.css"/>
+
+  <title>Settings</title>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen pb-32">
+
+  <!-- TopAppBar -->
+  <header class="fixed top-0 w-full z-50 bg-[#f6fafe]/70 dark:bg-slate-900/70 backdrop-blur-xl flex items-center justify-between px-6 h-16 w-full">
+    <div class="flex items-center gap-4">
+      <button class="hover:bg-black/5 dark:hover:bg-white/5 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+        <span class="material-symbols-outlined text-[#00327d] dark:text-blue-400">arrow_back</span>
+      </button>
+      <h1 class="text-xl font-bold text-[#00327d] dark:text-blue-400 font-['Plus_Jakarta_Sans'] tracking-tight">Settings</h1>
+    </div>
+    <div class="w-10"></div> <!-- Spacer for balance -->
+  </header>
+
+  <main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
+
+    <!-- Premium Minimalist Bento Layout -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+      <!-- User Profile Snapshot -->
+      <div class="col-span-1 md:col-span-2 bg-surface-container-lowest p-6 rounded-xl flex items-center gap-6">
+        <div class="relative w-20 h-20 rounded-full overflow-hidden ring-4 ring-secondary-container">
+          <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOVhoDWrPgnSl-hgzE7sl8pJYxlrBT8wWMsCYU7oLqYvbMzewj8kAPUkyTA7t59D5EfCkL5oT3fTEjVQHPFil_wjg6pWgW5x-UaECPpQ-IN8As1rX9_UidbH8hvlSn5DYZW8YAy19JmlIMHTLr-9wUGdm05EZjsFxOWvdN0ZcNCfw226nRIoETEJ61WdkwBBQduCWY5zU38cuN0bU8wvQlQtaKUx7Ns8fz0pgw9gdgpKpeD6I23Fnua-kto89kzM5MC54bXKei_PlL"/>
+        </div>
+        <div>
+          <h2 class="font-headline text-xl font-bold tracking-tight text-primary">Arjun Sharma</h2>
+          <p class="text-on-surface-variant text-sm font-medium">Explorer Tier • Gold Member</p>
+          <div class="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-tertiary-container/10 text-tertiary text-xs font-bold uppercase tracking-wider">
+            Premium Plan
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Settings List -->
+      <div class="col-span-1 md:col-span-2 space-y-3">
+        <p class="font-headline text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60 px-2 mb-4">Preferences</p>
+
+        <!-- Toggle: Push Notifications -->
+        <div class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors duration-300">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-primary">notifications</span>
+            </div>
+            <div>
+              <p class="font-headline font-semibold text-on-surface">Push Notifications</p>
+              <p class="text-xs text-on-surface-variant">Alerts for bookings and updates</p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input checked="" class="sr-only peer" type="checkbox"/>
+            <div class="w-12 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+
+        <!-- Toggle: Location Services -->
+        <div class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors duration-300">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-primary">location_on</span>
+            </div>
+            <div>
+              <p class="font-headline font-semibold text-on-surface">Location Services</p>
+              <p class="text-xs text-on-surface-variant">Personalized local experiences</p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input checked="" class="sr-only peer" type="checkbox"/>
+            <div class="w-12 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+
+        <!-- Toggle: Dark Mode -->
+        <div class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors duration-300">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-primary">dark_mode</span>
+            </div>
+            <div>
+              <p class="font-headline font-semibold text-on-surface">Dark Mode</p>
+              <p class="text-xs text-on-surface-variant">Easier on the eyes at night</p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input class="sr-only peer" type="checkbox"/>
+            <div class="w-12 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+
+        <!-- Choice: Currency -->
+        <div class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-colors duration-300">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
+              <span class="material-symbols-outlined text-primary">payments</span>
+            </div>
+            <div>
+              <p class="font-headline font-semibold text-on-surface">Currency</p>
+              <p class="text-xs text-on-surface-variant">Current: INR</p>
+            </div>
+          </div>
+          <div class="flex bg-surface-container p-1 rounded-lg">
+            <button class="px-4 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-xs font-bold text-primary">INR</button>
+            <button class="px-4 py-1.5 rounded-md text-xs font-bold text-on-surface-variant hover:text-on-surface transition-colors">USD</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal & About -->
+      <div class="col-span-1 md:col-span-2 mt-8 space-y-3">
+        <p class="font-headline text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/60 px-2 mb-4">Legal &amp; About</p>
+        <a class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-all duration-300" href="#">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-secondary-container/30 rounded-lg group-hover:bg-secondary-container transition-colors">
+              <span class="material-symbols-outlined text-secondary">policy</span>
+            </div>
+            <p class="font-headline font-semibold text-on-surface">Privacy Policy</p>
+          </div>
+          <span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+        </a>
+        <a class="group flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:bg-surface-container transition-all duration-300" href="#">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-secondary-container/30 rounded-lg group-hover:bg-secondary-container transition-colors">
+              <span class="material-symbols-outlined text-secondary">description</span>
+            </div>
+            <p class="font-headline font-semibold text-on-surface">Terms of Service</p>
+          </div>
+          <span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform">chevron_right</span>
+        </a>
+      </div>
+
+      <!-- Logout Section -->
+      <div class="col-span-1 md:col-span-2 pt-6">
+        <button class="w-full py-4 rounded-xl border-2 border-error/10 text-error font-headline font-bold hover:bg-error/5 active:scale-[0.98] transition-all">
+          Sign Out
+        </button>
+        <p class="text-center text-[10px] text-on-surface-variant/40 mt-8 tracking-widest uppercase">प्रvaas version 2.4.0 (982)</p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- BottomNavBar -->
+  <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
+    <a class="flex flex-col items-center justify-center text-[#434653] dark:text-slate-500 px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Explore</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#434653] dark:text-slate-500 px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined">confirmation_number</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Bookings</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#434653] dark:text-slate-500 px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Saved</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#00327d] dark:text-blue-400 bg-[#cbe7f5]/50 dark:bg-blue-900/30 rounded-2xl px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Profile</span>
+    </a>
+  </nav>
+
+</body>
+</html>
