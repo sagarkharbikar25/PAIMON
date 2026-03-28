@@ -1,0 +1,25 @@
+/* =============================================
+   onboarding_features_intro.css
+   ============================================= */
+
+/* Material Symbols icon font variation settings */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Glassmorphism card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Editorial blue gradient background utility */
+.bg-editorial-gradient {
+    background: linear-gradient(135deg, #00327d 0%, #0047ab 100%);
+}
+
+/* Ensure page is at least full viewport height */
+body {
+    min-height: max(884px, 100dvh);
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <script src="../js/map_explore.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/map_explore.css"/>
+</head>
+<body class="bg-background font-body text-on-surface antialiased overflow-hidden h-screen">
+
+  <!-- Top Navigation Shell -->
+  <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl flex justify-between items-center px-6 py-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+        <span class="material-symbols-outlined">explore</span>
+      </div>
+      <h1 class="font-headline font-bold tracking-tight text-[#00327d] text-xl">The Explorer</h1>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors active:scale-95 duration-200">
+        <span class="material-symbols-outlined text-[#00327d]">notifications</span>
+      </button>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+        <img
+          alt="User Profile"
+          data-alt="close-up portrait of a young man with a friendly expression in soft natural outdoor lighting"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIVo5a-ra1pVn977_1FC7E3tIAL_A16oxA11WktFyeKsz1LMatjwVNpw1TsprNMKGietGJ88vbk0LyBMGJ6S4YJ0XqFWpOb-lWZYZfA7x3DR7aBqyI4tjNwv94NwaMihbKCCidjw_ZoLSS8tXzi_p9QrXa_51xyGqv71mLT50xQop_pSk-vLUmw6O9d3Y3cvhaTJwXgn11a1M7KfO8BwKg22cIXUamCNS0KQ9vLkP9LpK0RGR2GdqUjJdQJrUDbrws_QAB0w02E8C8"
+        />
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Canvas: Map View -->
+  <main class="relative h-full w-full pt-20">
+
+    <!-- The Map -->
+    <div class="absolute inset-0 z-0 bg-surface-container">
+      <img
+        class="w-full h-full object-cover opacity-80 grayscale-[20%] brightness-[1.05]"
+        data-alt="stylized high-angle map view of an urban landscape with clean streets, parks, and architectural landmarks in soft morning light"
+        data-location="Jaipur, Rajasthan"
+        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa56iG3ZIS9KwZD6I9VKIwlLG79AoRDCkLyqTwpQdPaaM9EW5Ce7DTw94Sa021DI4pQkqKwaT3ukBWF6WcvXkTGNq8M6V0myO1AOxFU76Pax1Vy1pRzTVDfnh12PY5-1HCZu5tTztxjg-dy2CAF1nJfZvlCuOSleunZxIhtnF-9QV-MrsQMOP1UAhzTPSk2GjtWnCc44SS8A_WKbphg2zETuIvqcjcF9phmFw7O_Sj_dcjaNiJC0A8r56u24xdnpjMU28A_lo4xRvR"
+      />
+
+      <!-- Custom Markers -->
+
+      <!-- Marker 1: Hawa Mahal (Active) -->
+      <div class="absolute top-[35%] left-[45%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10">
+        <div class="flex flex-col items-center">
+          <div class="bg-primary px-4 py-2 rounded-full text-on-primary text-sm font-medium shadow-lg flex items-center gap-2 mb-2 transform transition-transform group-hover:scale-110">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">castle</span>
+            <span>Hawa Mahal</span>
+          </div>
+          <div class="w-4 h-4 bg-primary border-4 border-white rounded-full shadow-md"></div>
+        </div>
+      </div>
+
+      <!-- Marker 2: City Palace -->
+      <div class="absolute top-[55%] left-[60%] -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-10">
+        <div class="flex flex-col items-center">
+          <div class="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-primary text-sm font-medium shadow-md flex items-center gap-2 mb-2 transform transition-transform group-hover:scale-110">
+            <span class="material-symbols-outlined text-sm">museum</span>
+            <span>City Palace</span>
+          </div>
+          <div class="w-4 h-4 bg-white border-4 border-primary rounded-full shadow-md"></div>
+        </div>
+      </div>
+
+      <!-- Marker 3: Current Location Pin -->
+      <div class="absolute top-[65%] left-[30%] -translate-x-1/2 -translate-y-1/2 z-20">
+        <div class="relative">
+          <div class="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+          <div class="relative w-8 h-8 bg-primary rounded-full border-4 border-white shadow-xl flex items-center justify-center">
+            <div class="w-2 h-2 bg-white rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route Navigation Overlay -->
+      <svg class="absolute inset-0 pointer-events-none w-full h-full z-5">
+        <path
+          class="opacity-40"
+          d="M 30% 65% Q 35% 55%, 45% 35%"
+          fill="none"
+          stroke="#00327d"
+          stroke-dasharray="8 8"
+          stroke-width="4"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- UI Overlays -->
+    <div class="relative z-30 h-full w-full pointer-events-none flex flex-col justify-between p-6 pb-32">
+
+      <!-- Floating Search Bar -->
+      <div class="w-full max-w-lg mx-auto pointer-events-auto">
+        <div class="bg-white/80 backdrop-blur-2xl rounded-3xl p-2 shadow-[0_12px_40px_rgba(23,28,31,0.06)] flex items-center gap-3">
+          <div class="flex-1 flex items-center gap-3 px-4 py-2 bg-surface-container-high/50 rounded-2xl">
+            <span class="material-symbols-outlined text-slate-400">search</span>
+            <input
+              class="bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-slate-400 font-body w-full"
+              placeholder="Explore nearby experiences..."
+              type="text"
+            />
+          </div>
+          <button class="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+            <span class="material-symbols-outlined">tune</span>
+          </button>
+        </div>
+
+        <!-- Quick Category Chips -->
+        <div class="flex gap-2 mt-4 overflow-x-auto hide-scrollbar">
+          <button class="shrink-0 bg-white/90 backdrop-blur-md border border-outline-variant/15 px-5 py-2 rounded-2xl flex items-center gap-2 text-sm font-medium text-on-surface shadow-sm">
+            <span class="material-symbols-outlined text-primary text-lg">restaurant</span> Dining
+          </button>
+          <button class="shrink-0 bg-white/90 backdrop-blur-md border border-outline-variant/15 px-5 py-2 rounded-2xl flex items-center gap-2 text-sm font-medium text-on-surface shadow-sm">
+            <span class="material-symbols-outlined text-primary text-lg">local_see</span> Sightseeing
+          </button>
+          <button class="shrink-0 bg-white/90 backdrop-blur-md border border-outline-variant/15 px-5 py-2 rounded-2xl flex items-center gap-2 text-sm font-medium text-on-surface shadow-sm">
+            <span class="material-symbols-outlined text-primary text-lg">hotel</span> Stays
+          </button>
+          <button class="shrink-0 bg-white/90 backdrop-blur-md border border-outline-variant/15 px-5 py-2 rounded-2xl flex items-center gap-2 text-sm font-medium text-on-surface shadow-sm">
+            <span class="material-symbols-outlined text-primary text-lg">shopping_bag</span> Markets
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Context Card: Destination Details -->
+      <div class="w-full max-w-xl mx-auto pointer-events-auto">
+        <div class="bg-white/90 backdrop-blur-3xl rounded-[2.5rem] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-white/40">
+          <div class="flex justify-between items-start mb-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold tracking-widest uppercase rounded-full">Recommended</span>
+                <div class="flex items-center text-orange-500">
+                  <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="text-xs font-bold ml-1">4.9 (2.4k)</span>
+                </div>
+              </div>
+              <h2 class="font-headline text-2xl font-extrabold text-[#00327d] tracking-tight">Hawa Mahal</h2>
+              <p class="text-on-surface-variant text-sm flex items-center gap-1 mt-1">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                Hawa Mahal Rd, Badi Choupad, Jaipur
+              </p>
+            </div>
+            <button class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface" onclick="toggleFavourite(this)">
+              <span class="material-symbols-outlined">favorite</span>
+            </button>
+          </div>
+
+          <div class="flex gap-4 mb-6">
+            <div class="flex-1 h-24 rounded-2xl overflow-hidden relative">
+              <img
+                class="w-full h-full object-cover"
+                data-alt="dramatic close-up of the intricate honeycomb windows of Hawa Mahal in Jaipur during sunset golden hour"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjDoEuNebOBYlHcMQYTJBZEGdoQT6LDI2-a3FQrDsWu6lQbrUoKFZ-ym2ccTh2ugfq2k-CefrbBR4MHSlh1ArBAHXE27Pxa_BihQMqW5-fBatKN1d-IXgFnFIukTqT35qX8xblk-Oe5MhRB9hrFzeyNROK0GvwpWukCyl88JhWCQX_kvmYJ_Z2NCH6fIdfF5vJnk_LDVttxCyWEVRj2UFMoP3goijueAlAZUj8Q5NnmKuvpWLk2ldP0-udQDeYfsm9edniGIXvXhzS"
+              />
+            </div>
+            <div class="flex-1 flex flex-col justify-between">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-xs font-medium text-on-surface-variant">
+                  <span>Distance</span>
+                  <span class="text-primary">1.2 km</span>
+                </div>
+                <div class="flex items-center justify-between text-xs font-medium text-on-surface-variant">
+                  <span>Open until</span>
+                  <span class="text-primary">6:30 PM</span>
+                </div>
+              </div>
+              <button class="w-full bg-primary text-on-primary py-3 rounded-xl font-headline font-bold text-sm shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-sm">near_me</span> Directions
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-around py-4 border-t border-outline-variant/10">
+            <div class="flex flex-col items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-slate-400">info</span>
+              <span class="text-[10px] font-medium text-slate-500">Details</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-slate-400">photo_library</span>
+              <span class="text-[10px] font-medium text-slate-500">Photos</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 cursor-pointer hover:text-primary transition-colors">
+              <span class="material-symbols-outlined text-slate-400">share</span>
+              <span class="text-[10px] font-medium text-slate-500">Share</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bottom Navigation Shell -->
+  <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-2xl z-50 rounded-t-[2rem] border-t border-[#c3c6d5]/15 shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
+    <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#00327d] transition-all duration-200 active:scale-90" href="#">
+      <span class="material-symbols-outlined mb-1">event_note</span>
+      <span class="font-body text-[10px] font-medium tracking-wide">Itinerary</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#00327d] transition-all duration-200 active:scale-90" href="#">
+      <span class="material-symbols-outlined mb-1">payments</span>
+      <span class="font-body text-[10px] font-medium tracking-wide">Expenses</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-[#00327d] transition-all duration-200 active:scale-90" href="#">
+      <span class="material-symbols-outlined mb-1">confirmation_number</span>
+      <span class="font-body text-[10px] font-medium tracking-wide">Tickets</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#00327d] bg-[#0047AB]/10 rounded-2xl px-5 py-2 active:scale-90 transition-all duration-200" href="#">
+      <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">explore</span>
+      <span class="font-body text-[10px] font-bold tracking-wide">Explore</span>
+    </a>
+  </nav>
+
+  <!-- Map Tools (Side Floating) -->
+  <div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-3">
+    <button class="w-12 h-12 bg-white/90 backdrop-blur-md shadow-lg rounded-2xl flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">my_location</span>
+    </button>
+    <button class="w-12 h-12 bg-white/90 backdrop-blur-md shadow-lg rounded-2xl flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined">layers</span>
+    </button>
+    <div class="flex flex-col bg-white/90 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden">
+      <button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-slate-50 transition-colors" onclick="mapZoom('in')">
+        <span class="material-symbols-outlined text-sm">add</span>
+      </button>
+      <div class="h-[1px] w-8 mx-auto bg-outline-variant/20"></div>
+      <button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-slate-50 transition-colors" onclick="mapZoom('out')">
+        <span class="material-symbols-outlined text-sm">remove</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

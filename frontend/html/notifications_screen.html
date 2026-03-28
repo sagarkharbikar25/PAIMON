@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Notifications - प्रvaas</title>
+  <script src="../js/notifications_screen.js"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/notifications_screen.css"/>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+
+  <!-- TopAppBar -->
+  <header class="fixed top-0 w-full z-50 bg-[#f6fafe]/70 backdrop-blur-xl flex items-center justify-between px-6 h-16">
+    <div class="flex items-center gap-4">
+      <button
+        class="material-symbols-outlined text-[#00327d] hover:bg-black/5 p-2 rounded-full transition-colors active:scale-95 duration-200"
+        data-icon="arrow_back"
+        onclick="history.back()"
+      >arrow_back</button>
+      <h1 class="font-headline font-bold tracking-tight text-[#00327d] text-xl">Notifications</h1>
+    </div>
+    <button
+      class="material-symbols-outlined text-[#00327d] hover:bg-black/5 p-2 rounded-full transition-colors active:scale-95 duration-200"
+      data-icon="settings"
+    >settings</button>
+  </header>
+
+  <main class="pt-24 pb-32 px-6 max-w-2xl mx-auto space-y-8">
+
+    <!-- Category Section: Priority Alerts -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline font-bold text-lg text-primary">Priority Alerts</h2>
+        <span class="font-label text-xs font-semibold text-tertiary bg-tertiary-fixed px-3 py-1 rounded-full">3 New</span>
+      </div>
+
+      <!-- Upcoming Trip Card -->
+      <div class="group relative bg-surface-container-lowest rounded-xl p-6 shadow-[0_12px_40px_rgba(23,28,31,0.06)] overflow-hidden transition-all hover:translate-y-[-2px]">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-primary-container"></div>
+        <div class="flex gap-5">
+          <div class="h-14 w-14 rounded-xl bg-secondary-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-3xl" data-icon="event_upcoming">event_upcoming</span>
+          </div>
+          <div class="flex-1 space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="font-headline font-bold text-lg leading-none">Upcoming Trip</h3>
+              <span class="font-label text-[11px] text-on-surface-variant">2h ago</span>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              Your journey to <span class="font-semibold text-on-surface">Kyoto</span> begins in
+              <span class="text-primary font-bold">2 days</span>. Don't forget to check your boarding pass!
+            </p>
+            <div class="pt-2 flex gap-3">
+              <button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">View Itinerary</button>
+              <button class="bg-surface-container-high text-on-surface text-xs font-bold px-4 py-2 rounded-lg hover:bg-surface-container-highest transition-colors" onclick="dismissCard(this)">Dismiss</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weather Alert Card -->
+      <div class="group relative bg-surface-container-lowest rounded-xl p-6 shadow-[0_12px_40px_rgba(23,28,31,0.06)] overflow-hidden transition-all hover:translate-y-[-2px]">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-error"></div>
+        <div class="flex gap-5">
+          <div class="h-14 w-14 rounded-xl bg-error-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-error text-3xl" data-icon="rainy">rainy</span>
+          </div>
+          <div class="flex-1 space-y-2">
+            <div class="flex justify-between items-start">
+              <h3 class="font-headline font-bold text-lg leading-none">Weather Alert</h3>
+              <span class="font-label text-[11px] text-on-surface-variant">5h ago</span>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              <span class="font-semibold text-on-surface">Rain expected in Goa</span> tomorrow. Your beach
+              activities might be affected. We recommend indoor alternatives.
+            </p>
+            <div class="relative w-full h-32 mt-4 rounded-xl overflow-hidden">
+              <img
+                alt="Moody rain over tropical palms"
+                class="w-full h-full object-cover"
+                data-alt="Dark stormy clouds moving over tropical palm trees on a beach in Goa at dusk with raindrops on lens"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDryPjZ-_fScwufzJ5PLnKb_iVuiXI4FNy-w8zH6VBdnvwtFGiRlWUHM0Ohu2bsYPOvwNo-Q5gNHba9X_QHF0G8yURgkpCgqLaVb0exqgYmMka-Srb2uXYRNOQy1-dy5HtzqX5hHdKwCmHw5y3hAbH5FcQ9idDYLpgnTWCJVOEuM3P1zRUcA4fDmjdYrxkTZ-EBQPge-cc_CJxBt5zzdozyQ8K_cS8w_NwrmuLzlsltlXyjXf86zmwIEDeYe5jb-Vj32oqDpJ7UimG8"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                <span class="text-white text-xs font-medium flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm" data-icon="explore">explore</span>
+                  Explore Indoor Cafes
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Section: Budget Insights -->
+    <section class="space-y-4">
+      <h2 class="font-headline font-bold text-lg text-primary">Budget Insights</h2>
+
+      <!-- Budget Alert Card -->
+      <div class="group relative bg-surface-container-lowest rounded-xl p-6 shadow-[0_12px_40px_rgba(23,28,31,0.06)] overflow-hidden transition-all hover:translate-y-[-2px]">
+        <div class="absolute top-0 left-0 w-1.5 h-full bg-tertiary"></div>
+        <div class="flex gap-5">
+          <div class="h-14 w-14 rounded-xl bg-tertiary-fixed flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-tertiary text-3xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+          </div>
+          <div class="flex-1 space-y-3">
+            <div class="flex justify-between items-start">
+              <h3 class="font-headline font-bold text-lg leading-none">Budget Alert</h3>
+              <span class="font-label text-[11px] text-on-surface-variant">Yesterday</span>
+            </div>
+            <p class="text-on-surface-variant text-sm leading-relaxed">
+              Spending threshold reached! You have
+              <span class="font-bold text-tertiary">Spent 80%</span> of your allocated budget for the Japan Trip.
+            </p>
+            <!-- Mini Budget Progress -->
+            <div class="bg-surface-container-high h-4 w-full rounded-full overflow-hidden">
+              <div class="bg-tertiary h-full w-[80%] rounded-full"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">
+              <span>$3,200 Spent</span>
+              <span>$4,000 Total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secondary Feed: Asymmetric Layout -->
+    <section class="grid grid-cols-2 gap-4">
+      <div class="col-span-1 bg-secondary-container/30 p-5 rounded-2xl flex flex-col justify-between aspect-square">
+        <span class="material-symbols-outlined text-primary text-4xl" data-icon="hotel">hotel</span>
+        <div class="space-y-1">
+          <p class="font-headline font-bold text-primary">Hotel Deals</p>
+          <p class="text-xs text-on-secondary-container">15% off on Kyoto Ryokans just for you.</p>
+        </div>
+      </div>
+      <div class="col-span-1 bg-surface-container p-5 rounded-2xl flex flex-col justify-between aspect-square">
+        <span class="material-symbols-outlined text-on-surface-variant text-4xl" data-icon="map">map</span>
+        <div class="space-y-1">
+          <p class="font-headline font-bold text-on-surface">Guide Update</p>
+          <p class="text-xs text-on-surface-variant">New offline map available for Kyoto City.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BottomNavBar -->
+  <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
+    <a class="flex flex-col items-center justify-center text-[#434653] px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined" data-icon="explore">explore</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Explore</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#434653] px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Bookings</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#434653] px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Saved</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-[#00327d] bg-[#cbe7f5]/50 rounded-2xl px-5 py-1.5 hover:opacity-80 transition-opacity active:scale-90 duration-150" href="#">
+      <span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+      <span class="font-['Inter'] text-[11px] font-medium tracking-wide">Profile</span>
+    </a>
+  </nav>
+
+</body>
+</html>
