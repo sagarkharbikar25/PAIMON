@@ -51,5 +51,29 @@ app.get('/health', (_req, res) =>
 app.use(errorHandler);
 
 module.exports = app;
-const userRoutes = require('./routes/user.routes');
+const userRoutes = require('./routes/user.routes'); // ✅ move up
+
+// Member 2 routes
+app.use('/api/auth',          authRoutes);
+app.use('/api/trips',         tripRoutes);
+app.use('/api/expenses',      expenseRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/weather',       weatherRoutes);
+
+// Member 3 routes
+app.use('/api/itinerary',     itineraryRoutes);
+app.use('/api/chatbot',       chatbotRoutes);
+app.use('/api/translate',     translatorRoutes);
+app.use('/api/maps',          mapsRoutes);
+
+// ✅ ADD HERE (before export)
 app.use('/api/users', userRoutes);
+
+app.get('/health', (_req, res) =>
+  res.json({ status: 'OK', uptime: process.uptime() })
+);
+
+app.use(errorHandler);
+
+// ✅ EXPORT LAST
+module.exports = app;

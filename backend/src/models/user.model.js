@@ -57,16 +57,10 @@ const userSchema = new mongoose.Schema({
     max: 150,
   },
 
-  country:     { 
-    type: String,
-    enum: [
-      'United States',
-      'United Kingdom',
-      'Canada',
-      'Australia'
-    ],
-    default: 'India'
-  },
+  country: { 
+  type: String,
+  default: ''
+},
 
   state:       { 
     type: String,

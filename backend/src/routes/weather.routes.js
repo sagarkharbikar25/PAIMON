@@ -4,7 +4,7 @@
    ============================================= */
 
 const router  = require('express').Router();
-const protect = require('../middleware/auth.middleware');
+const { protect } = require('../middleware/auth.middleware');
 const {
   getCurrentWeather,
   getForecastWeather,

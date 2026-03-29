@@ -1,5 +1,5 @@
 const router  = require('express').Router();
-const protect = require('../middleware/auth.middleware');   // ✅ JWT, not testProtect
+const { protect } = require('../middleware/auth.middleware');   // ✅ JWT, not testProtect
 const {
   getTrips,
   getTrip,
@@ -19,3 +19,7 @@ router.post('/:id/invite',   protect, inviteMember);
 router.patch('/:id/respond', protect, respondToInvite);
 
 module.exports = router;
+console.log({
+  protect,
+  getTrips
+});

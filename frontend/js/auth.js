@@ -7,18 +7,15 @@ import { api, saveToken, clearToken, getToken } from './api.js';
 
 const USER_KEY = 'pravas_user';
 
-/* ── User cache helpers ──────────────────────────────────────────────────── */
-function saveUser(user)  { localStorage.setItem(USER_KEY, JSON.stringify(user)); }
-function clearUser()     { localStorage.removeItem(USER_KEY); }
+/* ── User cache helpers ── */
+function saveUser(user) { localStorage.setItem(USER_KEY, JSON.stringify(user)); }
+function clearUser()    { localStorage.removeItem(USER_KEY); }
+
 export function getCurrentUser() {
   try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch { return null; }
 }
 
-/* ─────────────────────────────────────────────
-   loginWithEmail(email, password)
-   → hits POST /api/auth/login
-   → saves JWT + user to localStorage
-   ───────────────────────────────────────────── */
+/* ── loginWithEmail ── */
 export async function loginWithEmail(email, password) {
   const data = await api.login(email, password);
   saveToken(data.token);
@@ -26,11 +23,7 @@ export async function loginWithEmail(email, password) {
   return data.user;
 }
 
-/* ─────────────────────────────────────────────
-   registerWithEmail(email, password, fullName)
-   → hits POST /api/auth/register
-   → saves JWT + user to localStorage
-   ───────────────────────────────────────────── */
+/* ── registerWithEmail ── */
 export async function registerWithEmail(email, password, fullName) {
   const data = await api.register(fullName, email, password);
   saveToken(data.token);
@@ -38,10 +31,7 @@ export async function registerWithEmail(email, password, fullName) {
   return data.user;
 }
 
-/* ─────────────────────────────────────────────
-   loginWithGoogle()
-   → placeholder for when Firebase is added later
-   ───────────────────────────────────────────── */
+/* ── Google login placeholder ── */
 export async function loginWithGoogle() {
   throw Object.assign(
     new Error('Google login is not enabled yet.'),
@@ -49,10 +39,7 @@ export async function loginWithGoogle() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   logout()
-   → clears token + user from localStorage
-   ───────────────────────────────────────────── */
+/* ── logout ── */
 export function logout() {
   clearToken();
   clearUser();
@@ -60,11 +47,14 @@ export function logout() {
 
 /* ─────────────────────────────────────────────
    guardRoute(dashboardUrl, loginUrl)
-   Replacement for Firebase's onAuthStateChanged.
 
-   Usage — same API as before:
-     Login page:     guardRoute('/home_dashboard.html', null)
-     Dashboard page: guardRoute(null, '/login.html')
+   Detects the correct base path automatically
+   so it works on Live Server (PAIMON root)
+   and any other environment.
+
+   Usage — same as before:
+     Login page:     guardRoute('/frontend/html/home_dashboard.html', null)
+     Protected page: guardRoute(null, '/frontend/html/login.html')
    ───────────────────────────────────────────── */
 export function guardRoute(dashboardUrl, loginUrl) {
   const isLoggedIn = !!getToken();
@@ -74,4 +64,12 @@ export function guardRoute(dashboardUrl, loginUrl) {
   } else if (!isLoggedIn && loginUrl) {
     window.location.href = loginUrl;
   }
+}
+
+/* ── Helper to build correct HTML page path ──
+   Use this anywhere you need to navigate:
+   e.g. window.location.href = htmlPath('home_dashboard.html')
+   ─────────────────────────────────────────── */
+export function htmlPath(page) {
+  return `/frontend/html/${page}`;
 }
