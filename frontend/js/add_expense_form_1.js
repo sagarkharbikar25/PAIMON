@@ -1,8 +1,18 @@
 /* =============================================
-   Add Expenses Form 1 — JavaScript
+   add-expenses-form-1.js
+   Pravas — Add Expense Form (connected to backend)
    ============================================= */
 
-// ── Tailwind config (must run before Tailwind parses classes) ──────────────
+import { guardRoute } from './auth.js';
+import { api } from './api.js';
+
+guardRoute(null, '/html/login.html');
+
+// Get tripId from URL ?tripId=xxx
+const params  = new URLSearchParams(window.location.search);
+const TRIP_ID = params.get('tripId');
+
+// ── Tailwind config ────────────────────────────────────────────────────────
 tailwind.config = {
   darkMode: "class",
   theme: {
@@ -72,18 +82,27 @@ tailwind.config = {
 };
 
 // ── DOM References ─────────────────────────────────────────────────────────
-const amountInput    = document.getElementById('amountInput');
-const descInput      = document.getElementById('descriptionInput');
-const categoryBtns   = document.querySelectorAll('.category-btn');
-const splitBtns      = document.querySelectorAll('.split-btn');
-const splitAmounts   = document.querySelectorAll('.split-amount');
-const splitLabels    = document.querySelectorAll('.split-label');
-const saveBtn        = document.getElementById('saveBtn');
-const cancelBtn      = document.getElementById('cancelBtn');
+const amountInput  = document.getElementById('amountInput');
+const descInput    = document.getElementById('descriptionInput');
+const categoryBtns = document.querySelectorAll('.category-btn');
+const splitBtns    = document.querySelectorAll('.split-btn');
+const splitAmounts = document.querySelectorAll('.split-amount');
+const splitLabels  = document.querySelectorAll('.split-label');
+const saveBtn      = document.getElementById('saveBtn');
+const cancelBtn    = document.getElementById('cancelBtn');
 
 // ── State ──────────────────────────────────────────────────────────────────
 const MEMBER_COUNT = 3;
 let currentSplitMethod = 'equally';
+let selectedCategory   = 'dining';
+
+// ── Set today's date ───────────────────────────────────────────────────────
+const dateDisplay = document.getElementById('dateDisplay');
+if (dateDisplay) {
+  dateDisplay.textContent = new Date().toLocaleDateString('en-IN', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
 
 // ── Category Selection ─────────────────────────────────────────────────────
 categoryBtns.forEach(btn => {
@@ -94,6 +113,7 @@ categoryBtns.forEach(btn => {
     });
     btn.classList.add('active', 'bg-primary', 'text-on-primary', 'shadow-lg', 'shadow-primary/20');
     btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    selectedCategory = btn.dataset.category;
   });
 });
 
@@ -110,67 +130,94 @@ splitBtns.forEach(btn => {
 // ── Split Preview Calculation ──────────────────────────────────────────────
 function updateSplitPreview() {
   const total = parseFloat(amountInput.value) || 0;
+  const share = total / MEMBER_COUNT;
 
   if (currentSplitMethod === 'equally') {
-    const share = total / MEMBER_COUNT;
-    splitAmounts.forEach(el => {
-      el.textContent = `₹ ${share.toFixed(2)}`;
-    });
-    splitLabels.forEach(el => {
-      el.textContent = `1/${MEMBER_COUNT} Share`;
-    });
+    splitAmounts.forEach(el => { el.textContent = `₹ ${share.toFixed(2)}`; });
+    splitLabels.forEach(el  => { el.textContent = `1/${MEMBER_COUNT} Share`; });
   } else {
-    // Percent mode — example: each gets 33.33 %
     const pct = (100 / MEMBER_COUNT).toFixed(1);
-    const share = total / MEMBER_COUNT;
-    splitAmounts.forEach(el => {
-      el.textContent = `₹ ${share.toFixed(2)}`;
-    });
-    splitLabels.forEach(el => {
-      el.textContent = `${pct}%`;
-    });
+    splitAmounts.forEach(el => { el.textContent = `₹ ${share.toFixed(2)}`; });
+    splitLabels.forEach(el  => { el.textContent = `${pct}%`; });
   }
 }
 
-// Re-calculate whenever the amount changes
 amountInput.addEventListener('input', updateSplitPreview);
 
-// ── Save Expense ───────────────────────────────────────────────────────────
-saveBtn.addEventListener('click', () => {
+// ── Save Expense → POST /api/expenses/:tripId ──────────────────────────────
+saveBtn.addEventListener('click', async () => {
   const amount      = parseFloat(amountInput.value);
   const description = descInput.value.trim();
-  const activeCategory = document.querySelector('.category-btn.active');
-  const category    = activeCategory ? activeCategory.dataset.category : 'uncategorised';
 
   if (!amount || amount <= 0) {
-    alert('Please enter a valid amount.');
+    showToast('Please enter a valid amount.', 'error');
     return;
   }
   if (!description) {
-    alert('Please add a description.');
+    showToast('Please add a description.', 'error');
+    return;
+  }
+  if (!TRIP_ID) {
+    showToast('No trip found. Go back and open a trip first.', 'error');
     return;
   }
 
-  const expense = {
-    amount,
-    description,
-    category,
-    splitMethod: currentSplitMethod,
-    date: 'Oct 24, 2024'
+  // Map category names to backend expected values
+  const categoryMap = {
+    dining:    'Food',
+    transport: 'Transport',
+    stay:      'Hotel',
+    shopping:  'Shopping',
+    tickets:   'Sightseeing',
   };
 
-  console.log('Expense saved:', expense);
-  alert(`Expense of ₹${amount.toFixed(2)} saved successfully!`);
+  saveBtn.disabled    = true;
+  saveBtn.innerHTML   = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Saving...`;
+
+  try {
+    await api.createExpense(TRIP_ID, {
+      title:     description,
+      amount,
+      currency:  'INR',
+      category:  categoryMap[selectedCategory] || 'Other',
+      splitType: currentSplitMethod === 'equally' ? 'equal' : 'percentage',
+      date:      new Date().toISOString(),
+    });
+
+    showToast('Expense saved!', 'success');
+    setTimeout(() => {
+      window.location.href = `/html/expense_tracker.html?tripId=${TRIP_ID}`;
+    }, 1000);
+
+  } catch (err) {
+    console.error(err);
+    showToast(err.message || 'Failed to save expense.', 'error');
+  } finally {
+    saveBtn.disabled  = false;
+    saveBtn.innerHTML = `<span class="material-symbols-outlined">save</span> Save Expense`;
+  }
 });
 
 // ── Cancel ─────────────────────────────────────────────────────────────────
 cancelBtn.addEventListener('click', () => {
   if (confirm('Discard this expense?')) {
-    amountInput.value = '';
-    descInput.value = '';
-    updateSplitPreview();
+    history.back();
   }
 });
 
 // ── Init ───────────────────────────────────────────────────────────────────
 updateSplitPreview();
+
+// ── Toast helper ───────────────────────────────────────────────────────────
+function showToast(message, type = 'success') {
+  const existing = document.getElementById('pravas-toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.id = 'pravas-toast';
+  toast.className = `fixed top-24 left-1/2 -translate-x-1/2 z-[999] px-6 py-3 rounded-xl
+    font-bold text-sm shadow-xl transition-all
+    ${type === 'error' ? 'bg-red-500 text-white' : 'bg-primary text-white'}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}

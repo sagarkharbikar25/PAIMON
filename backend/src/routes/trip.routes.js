@@ -1,6 +1,14 @@
-const router = require('express').Router();
-const { testProtect: protect } = require('../middleware/testAuth.middleware');
-const { getTrips, getTrip, createTrip, updateTrip, deleteTrip, inviteMember, respondToInvite } = require('../controllers/trip.controller');
+const router  = require('express').Router();
+const protect = require('../middleware/auth.middleware');   // ✅ JWT, not testProtect
+const {
+  getTrips,
+  getTrip,
+  createTrip,
+  updateTrip,
+  deleteTrip,
+  inviteMember,
+  respondToInvite,
+} = require('../controllers/trip.controller');
 
 router.get('/',              protect, getTrips);
 router.post('/',             protect, createTrip);

@@ -1,5 +1,7 @@
 /* =============================================
-   onboarding_benefits.js — Pravas Onboarding Benefits Screen Scripts
+   onboarding_benefits.js — Pravas Onboarding Benefits Screen
+   No backend endpoint needed for this screen.
+   Onboarding completion tracked in localStorage.
    ============================================= */
 
 /* ── Tailwind Config ── */
@@ -75,32 +77,47 @@ tailwind.config = {
 const TOTAL_STEPS = 3;
 let currentStep = 2; // This screen is step 2
 
+/* ── Mark onboarding complete in localStorage ── */
+function completeOnboarding() {
+  localStorage.setItem('onboardingComplete', 'true');
+  localStorage.setItem('onboardingCompletedAt', new Date().toISOString());
+}
+
 /* ── Next step navigation ── */
 function nextStep() {
   if (currentStep < TOTAL_STEPS) {
     currentStep++;
     updateStepUI();
   } else {
-    // Last step — navigate to main app
-    window.location.href = "../html/navigation_drawer.html";
+    // Last step — mark done and go to dashboard
+    completeOnboarding();
+    window.location.href = '../html/navigation_drawer.html';
   }
 }
 
 /* ── Skip onboarding entirely ── */
 function skipOnboarding() {
-  window.location.href = "../html/navigation_drawer.html";
+  completeOnboarding();
+  window.location.href = '../html/navigation_drawer.html';
 }
 
 /* ── Update step label and pagination dots ── */
 function updateStepUI() {
-  const label = document.getElementById("stepLabel");
+  const label = document.getElementById('stepLabel');
   if (label) label.textContent = `Step ${currentStep} of ${TOTAL_STEPS}`;
 
-  const dots = document.querySelectorAll("#paginationDots div");
+  const dots = document.querySelectorAll('#paginationDots div');
   dots.forEach((dot, i) => {
     const isActive = i + 1 === currentStep;
     dot.className = isActive
-      ? "w-6 h-2 rounded-full bg-primary transition-all duration-300"
-      : "w-2 h-2 rounded-full bg-surface-container-highest transition-all duration-300";
+      ? 'w-6 h-2 rounded-full bg-primary transition-all duration-300'
+      : 'w-2 h-2 rounded-full bg-surface-container-highest transition-all duration-300';
   });
 }
+
+/* ── On page load: skip onboarding if already completed ── */
+document.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('onboardingComplete') === 'true') {
+    window.location.href = '../html/navigation_drawer.html';
+  }
+});

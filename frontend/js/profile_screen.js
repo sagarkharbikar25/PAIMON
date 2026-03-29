@@ -1,123 +1,59 @@
 /* =============================================
    profile_screen.js
+   VIEW PAGE - Displays profile from backend
    ============================================= */
+import { guardRoute, logout } from './auth.js';
 
-/**
- * Profile Screen – Interactive Behaviour
- *
- * Interactive elements on this screen:
- *   • Back button          → navigate to the previous screen
- *   • Settings button      → open app settings
- *   • Edit avatar button   → trigger profile photo upload / edit flow
- *   • Account Settings rows (Personal Information, Payment Methods, Notifications)
- *   • Help & Support rows  (Help Center, Privacy & Terms)
- *   • Log Out button       → sign the user out
- *   • Bottom Navigation    → tab switching (Explore, Bookings, Saved, Profile)
- */
+guardRoute(null, '/html/login.html');
 
-document.addEventListener('DOMContentLoaded', function () {
-
-    /* ------------------------------------------------------------------
-       Back button
-       ------------------------------------------------------------------ */
-    const backBtn = document.querySelector('[data-action="back"]');
-    if (backBtn) {
-        backBtn.addEventListener('click', function () {
-            // TODO: navigate back (e.g. history.back())
-            console.log('Navigate back');
+document.addEventListener('DOMContentLoaded', async function () {
+    
+    // LOAD DATA from backend
+    try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('http://localhost:5000/api/users/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
         });
+        const data = await res.json();
+        
+        if (data.success && data.user) {
+            const user = data.user;
+            
+            // Update Name (find the h2 with Arjun Sharma)
+            const nameHeading = document.querySelector('h2.text-3xl');
+            if (nameHeading) nameHeading.textContent = user.name || 'Traveler';
+            
+            // Update Location (find the span with Mumbai, India)
+            const locationSpan = document.querySelector('span.text-primary.text-sm');
+            if (locationSpan && user.country) {
+                const locationText = user.state ? `${user.state}, ${user.country}` : user.country;
+                locationSpan.innerHTML = `<span class="material-symbols-outlined text-base" data-icon="location_on">location_on</span> ${locationText}`;
+            }
+            
+            // Update Avatar if photoUrl exists
+            const avatarImg = document.querySelector('section img[alt]');
+            if (avatarImg && user.photoUrl) {
+                avatarImg.src = user.photoUrl;
+            }
+        }
+    } catch (err) {
+        console.error("Failed to load profile:", err);
     }
 
-    /* ------------------------------------------------------------------
-       Settings button
-       ------------------------------------------------------------------ */
-    const settingsBtn = document.querySelector('[data-action="settings"]');
-    if (settingsBtn) {
-        settingsBtn.addEventListener('click', function () {
-            // TODO: open settings screen
-            console.log('Open settings');
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       Edit avatar button
-       ------------------------------------------------------------------ */
-    const editAvatarBtn = document.querySelector('[data-action="edit-avatar"]');
-    if (editAvatarBtn) {
-        editAvatarBtn.addEventListener('click', function () {
-            // TODO: trigger file picker or photo-edit modal
-            console.log('Edit avatar');
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       Account Settings rows
-       ------------------------------------------------------------------ */
-    const personalInfoBtn = document.querySelector('[data-action="personal-info"]');
-    if (personalInfoBtn) {
-        personalInfoBtn.addEventListener('click', function () {
-            // TODO: navigate to Personal Information screen
-            console.log('Open Personal Information');
-        });
-    }
-
-    const paymentBtn = document.querySelector('[data-action="payment-methods"]');
-    if (paymentBtn) {
-        paymentBtn.addEventListener('click', function () {
-            // TODO: navigate to Payment Methods screen
-            console.log('Open Payment Methods');
-        });
-    }
-
-    const notificationsBtn = document.querySelector('[data-action="notifications"]');
-    if (notificationsBtn) {
-        notificationsBtn.addEventListener('click', function () {
-            // TODO: navigate to Notifications settings screen
-            console.log('Open Notifications');
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       Help & Support rows
-       ------------------------------------------------------------------ */
-    const helpCenterBtn = document.querySelector('[data-action="help-center"]');
-    if (helpCenterBtn) {
-        helpCenterBtn.addEventListener('click', function () {
-            // TODO: open Help Center (in-app or external URL)
-            console.log('Open Help Center');
-        });
-    }
-
-    const privacyBtn = document.querySelector('[data-action="privacy-terms"]');
-    if (privacyBtn) {
-        privacyBtn.addEventListener('click', function () {
-            // TODO: open Privacy & Terms screen
-            console.log('Open Privacy & Terms');
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       Log Out button
-       ------------------------------------------------------------------ */
-    const logoutBtn = document.querySelector('[data-action="logout"]');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function () {
-            // TODO: sign user out and redirect to login screen
-            console.log('Log out');
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       Bottom Navigation tabs
-       ------------------------------------------------------------------ */
-    const navLinks = document.querySelectorAll('[data-nav]');
-    navLinks.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = link.getAttribute('data-nav');
-            // TODO: route to the selected tab (explore / bookings / saved / profile)
-            console.log('Navigate to tab:', target);
-        });
+    // BUTTON ACTIONS
+    document.querySelector('[data-action="back"]').addEventListener('click', () => window.history.back());
+    
+    document.querySelector('[data-action="personal-info"]').addEventListener('click', () => {
+        window.location.href = '/html/complete_profile_setup.html'; // Go to edit form
     });
-
+    
+    document.querySelector('[data-action="logout"]').addEventListener('click', () => {
+        logout();
+        window.location.href = '/html/login.html';
+    });
+    
+    // Settings button placeholder
+    document.querySelector('[data-action="settings"]').addEventListener('click', () => {
+        window.location.href = '/html/settings_screen.html'; // Create this later
+    });
 });

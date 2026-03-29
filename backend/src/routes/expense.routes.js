@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { testProtect: protect } = require('../middleware/testAuth.middleware');
+const router  = require('express').Router();
+const protect = require('../middleware/auth.middleware');
 const { getExpenses, createExpense, deleteExpense, getSettlementSummary } = require('../controllers/expense.controller');
 
 router.get('/:tripId',         protect, getExpenses);

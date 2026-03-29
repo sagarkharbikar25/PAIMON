@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { testProtect: protect } = require('../middleware/testAuth.middleware');
+const router  = require('express').Router();
+const protect = require('../middleware/auth.middleware');
 const { createItinerary } = require('../controllers/itinerary.controller');
 
 router.post('/generate', protect, createItinerary);

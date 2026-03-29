@@ -51,3 +51,5 @@ app.get('/health', (_req, res) =>
 app.use(errorHandler);
 
 module.exports = app;
+const userRoutes = require('./routes/user.routes');
+app.use('/api/users', userRoutes);

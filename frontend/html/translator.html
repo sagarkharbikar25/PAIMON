@@ -5,43 +5,38 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>प्रvaas - Translator</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
-
-  <!-- Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-  <!-- Tailwind CDN (must load before config script) -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-  <!-- Tailwind Config -->
+  <!-- Tailwind Config + all JS logic -->
   <script src="../js/translator.js"></script>
 
-  <!-- Custom Styles -->
   <link rel="stylesheet" href="../css/translator.css"/>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased pb-32">
 
-  <!-- TopAppBar -->
+  <!-- ── Top App Bar ── -->
   <header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl flex items-center justify-between px-6 h-16 w-full">
     <div class="flex items-center gap-4">
-      <button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors p-2 rounded-full active:scale-95 duration-200">
-        <span class="material-symbols-outlined" data-icon="menu">menu</span>
+      <button class="text-slate-500 hover:bg-slate-100/50 transition-colors p-2 rounded-full active:scale-95 duration-200">
+        <span class="material-symbols-outlined">menu</span>
       </button>
-      <h1 class="text-2xl font-extrabold text-[#00327d] dark:text-[#cbe7f5] tracking-tighter font-headline">प्रvaas</h1>
+      <h1 class="text-2xl font-extrabold text-primary tracking-tighter font-headline">प्रvaas</h1>
     </div>
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-white">
-        <img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP5SpDT_8ODcy7p3t3YykLfy0lx8vWehNdriy0mNkXpDMBALhPtlZ2OpDuC5W0RLBFW8TYTABapvdMWydKGgzrXcRAvnHWBETnWSEbxYZlos2nJbBFb_L8MQ7lV58EBLE3NL5rz3CzLMMxdmrVvfaIp0CoImV3xBG5ezZmI2UPgOHqRipRFNu_GdQ0JdIKV57EdZ8PY_CwZqliYrGDLcMiA8wdaDO9wFMgxym2xf_5L1QHAbyflTgqbkmepEeHuma0LkDhuKqy09dp"/>
+        <img alt="User profile" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP5SpDT_8ODcy7p3t3YykLfy0lx8vWehNdriy0mNkXpDMBALhPtlZ2OpDuC5W0RLBFW8TYTABapvdMWydKGgzrXcRAvnHWBETnWSEbxYZlos2nJbBFb_L8MQ7lV58EBLE3NL5rz3CzLMMxdmrVvfaIp0CoImV3xBG5ezZmI2UPgOHqRipRFNu_GdQ0JdIKV57EdZ8PY_CwZqliYrGDLcMiA8wdaDO9wFMgxym2xf_5L1QHAbyflTgqbkmepEeHuma0LkDhuKqy09dp"/>
       </div>
     </div>
   </header>
 
   <main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
 
-    <!-- Hero Section / Context -->
+    <!-- Hero -->
     <div class="space-y-2">
       <p class="font-label text-sm uppercase tracking-widest text-on-secondary-fixed-variant">Communication</p>
       <h2 class="font-headline text-3xl font-bold tracking-tight text-primary">Global Translator</h2>
@@ -53,30 +48,31 @@
 
       <!-- Language Selector -->
       <div class="flex items-center justify-between gap-4 bg-surface-container-lowest p-4 rounded-2xl">
+
+        <!-- From language — id="lang-from" populated by JS -->
         <div class="flex-1">
           <label class="block text-[10px] font-label font-medium uppercase tracking-widest text-on-surface-variant mb-1 ml-1">From</label>
           <div class="relative">
-            <select class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-primary font-semibold appearance-none focus:ring-2 focus:ring-primary/20">
-              <option>English</option>
-              <option>Hindi</option>
-              <option>Spanish</option>
+            <select id="lang-from" class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-primary font-semibold appearance-none focus:ring-2 focus:ring-primary/20">
+              <!-- Populated by JS -->
             </select>
-            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
           </div>
         </div>
-        <button class="mt-5 p-3 bg-primary text-on-primary rounded-full hover:bg-primary-container transition-colors active:scale-90 duration-200">
-          <span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span>
+
+        <!-- Swap button — id="swap-btn" -->
+        <button id="swap-btn" class="mt-5 p-3 bg-primary text-on-primary rounded-full hover:bg-primary-container transition-colors active:scale-90 duration-200" aria-label="Swap languages">
+          <span class="material-symbols-outlined">swap_horiz</span>
         </button>
+
+        <!-- To language — id="lang-to" populated by JS -->
         <div class="flex-1">
           <label class="block text-[10px] font-label font-medium uppercase tracking-widest text-on-surface-variant mb-1 ml-1">To</label>
           <div class="relative">
-            <select class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-primary font-semibold appearance-none focus:ring-2 focus:ring-primary/20">
-              <option>Japanese</option>
-              <option>French</option>
-              <option>German</option>
-              <option>Hindi</option>
+            <select id="lang-to" class="w-full bg-surface-container-high border-none rounded-xl py-3 px-4 text-primary font-semibold appearance-none focus:ring-2 focus:ring-primary/20">
+              <!-- Populated by JS -->
             </select>
-            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant" data-icon="expand_more">expand_more</span>
+            <span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-on-surface-variant">expand_more</span>
           </div>
         </div>
       </div>
@@ -84,13 +80,19 @@
       <!-- Input Area -->
       <div class="space-y-2">
         <div class="relative bg-surface-container-lowest rounded-2xl overflow-hidden min-h-[160px] flex flex-col border border-outline-variant/15">
-          <textarea class="w-full h-full min-h-[140px] bg-transparent border-none focus:ring-0 p-6 text-lg text-on-surface placeholder:text-on-surface-variant/40 resize-none font-body" placeholder="Type text to translate..."></textarea>
+          <!-- id="translate-input" — JS listens for 'input' events (debounced 800ms) -->
+          <textarea
+            id="translate-input"
+            class="w-full h-full min-h-[140px] bg-transparent border-none focus:ring-0 p-6 text-lg text-on-surface placeholder:text-on-surface-variant/40 resize-none font-body"
+            placeholder="Type text to translate… (Ctrl+Enter to translate now)"></textarea>
           <div class="absolute bottom-4 right-4 flex items-center gap-2">
-            <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">
-              <span class="material-symbols-outlined" data-icon="mic">mic</span>
+            <!-- id="mic-btn" — triggers speech-to-text -->
+            <button id="mic-btn" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" aria-label="Voice input">
+              <span class="material-symbols-outlined">mic</span>
             </button>
-            <button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">
-              <span class="material-symbols-outlined" data-icon="close">close</span>
+            <!-- id="clear-btn" — clears input + output -->
+            <button id="clear-btn" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" aria-label="Clear text">
+              <span class="material-symbols-outlined">close</span>
             </button>
           </div>
         </div>
@@ -99,36 +101,50 @@
       <!-- Output Area -->
       <div class="space-y-4">
         <div class="flex items-center justify-between px-2">
-          <span class="text-[10px] font-label font-medium uppercase tracking-widest text-on-surface-variant">Translated Text</span>
+          <div class="flex items-center gap-3">
+            <span class="text-[10px] font-label font-medium uppercase tracking-widest text-on-surface-variant">Translated Text</span>
+            <!-- id="detected-language" — shows "Detected: English" etc. -->
+            <span id="detected-language" class="text-[10px] text-on-secondary-fixed-variant font-medium italic"></span>
+          </div>
           <div class="flex gap-4">
-            <button class="text-primary hover:scale-110 transition-transform">
-              <span class="material-symbols-outlined" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+            <!-- id="speak-btn" — text-to-speech -->
+            <button id="speak-btn" class="text-primary hover:scale-110 transition-transform" aria-label="Speak translation">
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volume_up</span>
             </button>
-            <button class="text-on-surface-variant hover:scale-110 transition-transform">
-              <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+            <!-- id="copy-btn" — copy to clipboard -->
+            <button id="copy-btn" class="text-on-surface-variant hover:scale-110 transition-transform" aria-label="Copy translation">
+              <span class="material-symbols-outlined">content_copy</span>
             </button>
           </div>
         </div>
-        <div class="bg-primary/5 rounded-3xl p-8 min-h-[120px] relative border border-primary/10 group">
-          <p class="text-2xl font-headline font-bold text-primary leading-snug">
-            こんにちは、日本への旅を楽しみにしています。
+
+        <!-- id="output-container" — dblclick on a word → word meaning modal -->
+        <div id="output-container" class="bg-primary/5 rounded-3xl p-8 min-h-[120px] relative border border-primary/10 group cursor-text select-text">
+          <!-- id="translated-text" — main translation output -->
+          <p id="translated-text" class="text-2xl font-headline font-bold text-primary leading-snug">
+            Translation will appear here…
           </p>
-          <p class="mt-4 text-sm text-on-secondary-fixed-variant italic">Konnichiwa, Nihon e no tabi o tanoshiminishiteimasu.</p>
+          <!-- id="translated-romanized" — romanization (if returned by model) -->
+          <p id="translated-romanized" class="mt-4 text-sm text-on-secondary-fixed-variant italic"></p>
+          <p class="text-[10px] text-on-surface-variant/50 mt-3">Double-click any word to see its meaning</p>
         </div>
       </div>
 
       <!-- Quick Actions -->
       <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-        <button class="flex items-center gap-2 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold whitespace-nowrap">
-          <span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+        <!-- id="btn-recent" → opens history panel -->
+        <button id="btn-recent" class="flex items-center gap-2 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-sm">history</span>
           Recent
         </button>
-        <button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-semibold whitespace-nowrap">
-          <span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+        <!-- id="btn-favorites" -->
+        <button id="btn-favorites" class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-sm">star</span>
           Favorites
         </button>
-        <button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-semibold whitespace-nowrap">
-          <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+        <!-- id="btn-offline" -->
+        <button id="btn-offline" class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-semibold whitespace-nowrap active:scale-95 transition-transform">
+          <span class="material-symbols-outlined text-sm">download</span>
           Offline Mode
         </button>
       </div>
@@ -138,41 +154,51 @@
     <!-- Contextual Card -->
     <div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant/15 p-1">
       <div class="h-40 w-full overflow-hidden rounded-2xl">
-        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLq-pDltcHpMYykY6SSBhT1kLcX1NOXbonee54cn_IqKeE_UcwUO_Z6LfOAZN1KOaq14Z85qMDGJQLGnJmpzK1aTCHJ8kOGszzbftnMleYTFFC4ONW3VJbFvAu5wZz0nZQAQcZ3xCW_0Erl0NuEi5s5uDBW9keQsbVkkJzlvchZni5KGF5g279dJv25woFVD0WzqzTsnJ9qGQm46m7O7j8hCUDH6uDjyrY7Hb_ZvxxEvwt3WA-sgTIsxsCkMRqbNY0uQh2lKl_Pb4k"/>
+        <img class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLq-pDltcHpMYykY6SSBhT1kLcX1NOXbonee54cn_IqKeE_UcwUO_Z6LfOAZN1KOaq14Z85qMDGJQLGnJmpzK1aTCHJ8kOGszzbftnMleYTFFC4ONW3VJbFvAu5wZz0nZQAQcZ3xCW_0Erl0NuEi5s5uDBW9keQsbVkkJzlvchZni5KGF5g279dJv25woFVD0WzqzTsnJ9qGQm46m7O7j8hCUDH6uDjyrY7Hb_ZvxxEvwt3WA-sgTIsxsCkMRqbNY0uQh2lKl_Pb4k"
+          alt="Tokyo guide"/>
       </div>
       <div class="p-5 flex items-start justify-between">
         <div>
           <h3 class="font-headline font-bold text-lg">Heading to Tokyo?</h3>
           <p class="text-sm text-on-surface-variant">Download the 'Local Etiquette' guide for better communication.</p>
         </div>
-        <button class="bg-tertiary text-on-tertiary px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Guide</button>
+        <button class="bg-tertiary text-on-tertiary px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest active:scale-95 transition-transform">Guide</button>
       </div>
     </div>
 
   </main>
 
-  <!-- BottomNavBar -->
+  <!-- ── Bottom Nav Bar ── -->
+  <!-- data-nav values match navRoutes map in translator.js -->
   <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-12px_40px_rgba(23,28,31,0.06)]">
-    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 tap-highlight-none transition-transform active:scale-90 hover:text-[#0047AB] dark:hover:text-white">
-      <span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
-      <span class="text-[10px] font-['Inter'] font-medium uppercase tracking-widest mt-1">Planner</span>
+
+    <button data-nav="planner" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-transform active:scale-90 hover:text-primary">
+      <span class="material-symbols-outlined">auto_awesome</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest mt-1">Planner</span>
     </button>
-    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 tap-highlight-none transition-transform active:scale-90 hover:text-[#0047AB] dark:hover:text-white">
-      <span class="material-symbols-outlined" data-icon="forum">forum</span>
-      <span class="text-[10px] font-['Inter'] font-medium uppercase tracking-widest mt-1">Chat</span>
+
+    <button data-nav="chat" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-transform active:scale-90 hover:text-primary">
+      <span class="material-symbols-outlined">forum</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest mt-1">Chat</span>
     </button>
-    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 tap-highlight-none transition-transform active:scale-90 hover:text-[#0047AB] dark:hover:text-white">
-      <span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
-      <span class="text-[10px] font-['Inter'] font-medium uppercase tracking-widest mt-1">Weather</span>
+
+    <button data-nav="weather" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-transform active:scale-90 hover:text-primary">
+      <span class="material-symbols-outlined">cloud_sync</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest mt-1">Weather</span>
     </button>
-    <button class="flex flex-col items-center justify-center bg-[#cbe7f5] dark:bg-[#0047AB]/30 text-[#00327d] dark:text-white rounded-2xl px-5 py-2 scale-105 transition-all tap-highlight-none transition-transform active:scale-90">
-      <span class="material-symbols-outlined" data-icon="translate" style="font-variation-settings: 'FILL' 1;">translate</span>
-      <span class="text-[10px] font-['Inter'] font-medium uppercase tracking-widest mt-1">Translate</span>
+
+    <!-- Active tab — Translate -->
+    <button data-nav="translate" class="flex flex-col items-center justify-center bg-secondary-container text-primary rounded-2xl px-5 py-2 scale-105 transition-all active:scale-90">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">translate</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest mt-1">Translate</span>
     </button>
-    <button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 tap-highlight-none transition-transform active:scale-90 hover:text-[#0047AB] dark:hover:text-white">
-      <span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
-      <span class="text-[10px] font-['Inter'] font-medium uppercase tracking-widest mt-1">Saved</span>
+
+    <button data-nav="saved" class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 transition-transform active:scale-90 hover:text-primary">
+      <span class="material-symbols-outlined">bookmark</span>
+      <span class="text-[10px] font-medium uppercase tracking-widest mt-1">Saved</span>
     </button>
+
   </nav>
 
 </body>
