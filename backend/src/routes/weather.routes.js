@@ -1,6 +1,15 @@
-const router = require('express').Router();
-const { testProtect: protect } = require('../middleware/testAuth.middleware');
-const { getCurrentWeather, getForecastWeather, getWeatherAlerts } = require('../controllers/weather.controller');
+/* =============================================
+   weather.routes.js
+   Pravas — Weather Routes
+   ============================================= */
+
+const router  = require('express').Router();
+const protect = require('../middleware/auth.middleware');
+const {
+  getCurrentWeather,
+  getForecastWeather,
+  getWeatherAlerts,
+} = require('../controllers/weather.controller');
 
 router.get('/current',  protect, getCurrentWeather);
 router.get('/forecast', protect, getForecastWeather);
