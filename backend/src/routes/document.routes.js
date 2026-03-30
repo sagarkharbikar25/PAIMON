@@ -7,8 +7,7 @@ const path    = require('path');
 const fs      = require('fs');
 const router  = require('express').Router();
 const multer  = require('multer');
-const { protect } = require('../middleware/auth.middleware');
-const {
+const { protect } = require('../middleware/auth.middleware');const {
   uploadDocument,
   getDocuments,
   deleteDocument,

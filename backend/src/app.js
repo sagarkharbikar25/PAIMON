@@ -17,6 +17,9 @@ const itineraryRoutes    = require('./routes/itinerary.routes');
 const chatbotRoutes      = require('./routes/chatbot.routes');
 const translatorRoutes   = require('./routes/translator.routes');
 const mapsRoutes         = require('./routes/maps.routes');
+const userRoutes         = require('./routes/user.routes');
+const reportRoutes       = require('./routes/report.routes'); // Add this line
+
 const { errorHandler }   = require('./middleware/error.middleware');
 const { rateLimiter }    = require('./middleware/rateLimiter.middleware');
 
@@ -25,7 +28,7 @@ connectDB();
 
 app.use(helmet());
 app.use(cors({ origin: '*' }));
-app.use(express.json({ limit: '10kb' }));
+app.use(express.json({ limit: '10mb' }));
 app.use(mongoSanitize());
 app.use(xss());
 app.use(morgan('dev'));
@@ -43,30 +46,8 @@ app.use('/api/itinerary',     itineraryRoutes);
 app.use('/api/chatbot',       chatbotRoutes);
 app.use('/api/translate',     translatorRoutes);
 app.use('/api/maps',          mapsRoutes);
-
-app.get('/health', (_req, res) =>
-  res.json({ status: 'OK', uptime: process.uptime() })
-);
-app.use(errorHandler);
-
-module.exports = app;
-const userRoutes = require('./routes/user.routes'); // ✅ move up
-
-// Member 2 routes
-app.use('/api/auth',          authRoutes);
-app.use('/api/trips',         tripRoutes);
-app.use('/api/expenses',      expenseRoutes);
-app.use('/api/notifications', notificationRoutes);
-app.use('/api/weather',       weatherRoutes);
-
-// Member 3 routes
-app.use('/api/itinerary',     itineraryRoutes);
-app.use('/api/chatbot',       chatbotRoutes);
-app.use('/api/translate',     translatorRoutes);
-app.use('/api/maps',          mapsRoutes);
-
-// ✅ ADD HERE (before export)
-app.use('/api/users', userRoutes);
+app.use('/api/users',         userRoutes);
+app.use('/api/reports',       reportRoutes); // Add this line
 
 app.get('/health', (_req, res) =>
   res.json({ status: 'OK', uptime: process.uptime() })
@@ -74,5 +55,4 @@ app.get('/health', (_req, res) =>
 
 app.use(errorHandler);
 
-// ✅ EXPORT LAST
 module.exports = app;

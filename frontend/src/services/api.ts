@@ -3,8 +3,7 @@
    Pravas — Central API Wrapper (TypeScript)
    ============================================= */
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
+const BASE_URL = (import.meta as any).env.VITE_API_URL || 'http://localhost:5000/api';
 /* ── Token helpers ─────────────────────────── */
 export const saveToken = (token: string) => localStorage.setItem('pravas_token', token);
 export const getToken  = ()              => localStorage.getItem('pravas_token');
@@ -41,4 +40,8 @@ async function apiFetch<T = unknown>(
   return data as T;
 }
 
+// ✅ ADD THIS LINE - Export as named export too
+export { apiFetch };
+
+// Keep default export for backward compatibility
 export default apiFetch;
